@@ -1,6 +1,6 @@
 import { Schema, model, Types } from 'mongoose'
 
-export interface User {
+interface User {
 	email: string 
 	password: string 
 	username?: string
@@ -39,4 +39,5 @@ const userSchema = new Schema(
 )
 
 const user = model<User>('User', userSchema)
-export default user
+
+export { user as UserModel, User }

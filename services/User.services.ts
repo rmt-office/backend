@@ -1,16 +1,15 @@
-import UserModel from "../models/User.model";
+import { UserModel, User }  from "../models/User.model";
 import { create, findAll } from "../mongoose/mongooseServices";
 
-export type User = {
-  username: string, 
-  password: string, 
-  email: string
-}
+
+type Overwrite<T1, T2> = { [Prop in Exclude<keyof T1, keyof T2>]: T1[Prop] } & T2 
+export type NewUser = Overwrite<Pick<User, 'username' | 'password' | 'email'>, { password?: string }>
+
  class UserService {
-  async createUser(user: User) {
+  async createUser(user: NewUser) {
     return create(UserModel, user)
   }
-
+  
   async getUsers() {
     return findAll(UserModel)
   }
