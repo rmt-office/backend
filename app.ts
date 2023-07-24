@@ -1,7 +1,10 @@
 import express from 'express'
 import 'dotenv/config'
 import morgan from 'morgan'
+
 import { connectDB } from './mongoose/mongooseConnection'
+import { errorHandling } from './routes/errorHandling'
+
 import routes from './routes'
 
 const app = express()
@@ -11,5 +14,8 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/', routes)
+
+
+errorHandling(app)
 
 export default app
