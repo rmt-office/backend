@@ -1,12 +1,20 @@
 import { NextFunction, Request, Response } from 'express'
-import userServices from '../services/User.services'
+import userServices, { NewUser } from '../services/User.services'
 
 class UserController {
 	async signup(req: Request, res: Response, next: NextFunction) {
 		const { username, password, email } = req.body
-		const newUser = await userServices.createUser({ username, email, password })
+		try {
+			const createdUser = await userServices.createUser({ username, email, password })
+			const newUser: NewUser  = createdUser.toObject()
 
-		console.log(newUser)
+			delete newUser.password
+
+			res.status(201).json(newUser)
+		} catch (error) {
+			next(error)
+		}
+
 	}
 }
 
