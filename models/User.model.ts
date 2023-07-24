@@ -1,33 +1,42 @@
-import { createModel } from '../mongoose/mongooseModelCreation'
+import { Schema, model, Types } from 'mongoose'
 
-interface User {
-  email: {
-    type: typeof String,
-    required: boolean
-  },
-  password: {
-    type: typeof String,
-    required: boolean
-  },
-  username: {
-    type: typeof String,
-  },
-  createdAt?: string,
-  updatedAt?: string
+export interface User {
+	email: string 
+	password: string 
+	username?: string
+	isAdmin: boolean
+	profileImage: string
+	favorites: Types.ObjectId[]
 }
 
-const userSchema: User = {
-  email: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  username: {
-    type: String,
-  }
-}
+const userSchema = new Schema(
+	{
+		email: {
+			type: String,
+			required: true,
+			// maybe create a helper function or use zod
+			match: /^\S+@\S+\.\S+$/, 
+			trim: true,
+			unique: true,
+			lowercase: true
+		},
+		password: {
+			type: String,
+			required: true,
+		},
+		username: {
+			type: String,
+			unique: true
+		},
+		favorites: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Place',
+			},
+		],
+	},
+	{ timestamps: true }
+)
 
-export default createModel(userSchema, 'User')
+const user = model<User>('User', userSchema)
+export default user
