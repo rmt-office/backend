@@ -8,3 +8,7 @@ export const findAll = <TModel>(model: Model<TModel>) => {
   return model.find()
 }
 
+export const findOne = <TModel>(model: Model<TModel>, filter: {}) => {
+  return model.findOne(filter)
+}
+
