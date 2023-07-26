@@ -15,7 +15,4 @@ app.use(morgan('dev'))
 
 app.use('/', routes)
 
-
-errorHandling(app)
-
 export default app
