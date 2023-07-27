@@ -8,7 +8,7 @@ const router = Router()
 router.use('/user', userRoutes)
 
 router.use((error: ErrorProps, req: Request, res: Response, next: NextFunction): void => {
-  errorHandling(error, req, res)
+  errorHandling(error, res)
 })
 
 export default router

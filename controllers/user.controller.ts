@@ -1,7 +1,7 @@
 import userServices, { NewUser } from '../services/User.services'
 import { checkRequiredInput, checkUsername, validateLogin } from '../utils/checkUserInfo'
 import { throwError } from '../utils/throwError'
-import { RouteProps } from '../utils/types'
+import { PayloadRequest, RouteProps } from '../utils/types'
 import { hashPassword } from '../utils/passwordHandlers'
 import { createToken } from '../utils/tokenHandler'
 import UserServices from '../services/User.services'
@@ -54,6 +54,17 @@ class UserController {
 			}
 		} catch (error: any) {
 			error.place = 'Login'
+			next(error)
+		}
+	}
+	
+	async verify(req: PayloadRequest, res: RouteProps['res'], next: RouteProps['next']) {
+		try {
+			const decodedToken = req.payload
+			
+			res.status(200).json(decodedToken)
+		} catch (error: any) {
+			error.place = 'Verify'
 			next(error)
 		}
 	}

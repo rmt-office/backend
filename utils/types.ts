@@ -1,4 +1,5 @@
-import { Request, Response, NextFunction } from "express"
+import { Request, Response, NextFunction } from 'express'
+import jwt from 'jsonwebtoken'
 
 export interface ErrorProps {
 	message: string
@@ -7,8 +8,12 @@ export interface ErrorProps {
 }
 
 export type RouteProps = {
-  req: Request
-  res: Response
-  error: ErrorProps
-  next: NextFunction
+	req: Request
+	res: Response
+	error: ErrorProps
+	next: NextFunction
+}
+
+export interface PayloadRequest extends Request {
+	payload?: jwt.JwtPayload
 }

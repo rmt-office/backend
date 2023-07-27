@@ -2,7 +2,6 @@ import { RouteProps } from '../utils/types'
 
 export const errorHandling = (
 	error: RouteProps['error'],
-	req: RouteProps['req'],
 	res: RouteProps['res']
 ) => {
 	console.log(`ERROR: `)
