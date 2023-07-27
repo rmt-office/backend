@@ -1,13 +1,10 @@
-import { Express, NextFunction, Request, Response } from 'express'
+import { RouteProps } from '../utils/types'
 
-export type Error = {
-	message: string
-	status: number
-  place: string
-}
-
-export const errorHandling = (app: Express) => {
-	app.use((error: Error, req: Request, res: Response, next: NextFunction): void => {
-		res.status(error.status || 500).json(error.message)
-	})
+export const errorHandling = (
+	error: RouteProps['error'],
+	res: RouteProps['res']
+) => {
+	console.log(`ERROR: `)
+	console.table(error)
+	res.status(error.status || 500).json({ message: error.message, place: error.place })
 }
