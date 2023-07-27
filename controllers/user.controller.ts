@@ -36,7 +36,18 @@ class UserController {
 		}
 	}
 
-  async login(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {}
+  async login(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
+		const { email, password } = req.body
+
+		try {
+			const userFromDB = await userServices.getOneUser({ email })
+
+			res.status(200).json(userFromDB)
+		} catch (error: any) {
+			error.place = 'Login'
+			next(error)
+		}
+	}
 }
 
 export default new UserController()
