@@ -49,4 +49,4 @@ export const validateLogin = async (user: User | null, passwordCandidate: string
     }
     throwError(error)
   }
-} 
+}

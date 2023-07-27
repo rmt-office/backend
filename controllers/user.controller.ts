@@ -2,7 +2,8 @@ import userServices, { NewUser } from '../services/User.services'
 import { checkRequiredInput, checkUsername, validateLogin } from '../utils/checkUserInfo'
 import { throwError } from '../utils/throwError'
 import { RouteProps } from '../utils/types'
-import { hashPassword, validatePassword } from '../utils/passwordHandlers'
+import { hashPassword } from '../utils/passwordHandlers'
+import { createToken } from '../utils/tokenHandler'
 import UserServices from '../services/User.services'
 
 class UserController {
@@ -41,10 +42,16 @@ class UserController {
 
 		try {
 			const userFromDB = await userServices.getOneUser({ email })
-
 			await validateLogin(userFromDB, password)
-
-			res.status(200).json(userFromDB)
+	
+			const userObject: NewUser | undefined = userFromDB?.toObject()
+			if (userObject) {
+				delete userObject.password
+	
+				const token = createToken(userObject)
+			
+				res.status(200).json(token)
+			}
 		} catch (error: any) {
 			error.place = 'Login'
 			next(error)
