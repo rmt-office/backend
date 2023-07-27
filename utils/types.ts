@@ -12,8 +12,5 @@ export type RouteProps = {
 	res: Response
 	error: ErrorProps
 	next: NextFunction
-}
-
-export interface PayloadRequest extends Request {
-	payload?: jwt.JwtPayload
+	payload: Request & { payload?: jwt.JwtPayload }
 }

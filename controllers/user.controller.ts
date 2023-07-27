@@ -1,24 +1,24 @@
 import userServices, { NewUser } from '../services/User.services'
 import { checkRequiredInput, checkUsername, validateLogin } from '../utils/checkUserInfo'
 import { throwError } from '../utils/throwError'
-import { PayloadRequest, RouteProps } from '../utils/types'
+import { RouteProps } from '../utils/types'
 import { hashPassword } from '../utils/passwordHandlers'
 import { createToken } from '../utils/tokenHandler'
 import UserServices from '../services/User.services'
 
 class UserController {
 	async signup(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
-		const { password, email } = req.body
+		const { email, password, confirmPassword } = req.body
 		let { username } = req.body
 		try {
-			checkRequiredInput(email, password)
+			checkRequiredInput(email, password, confirmPassword)
 			username = checkUsername(username, email)
 
 			const userFromDB = await UserServices.getOneUser({ email })
 			if (userFromDB) {
 				const error = {
 					message: 'User already exists',
-					status: 400
+					status: 400,
 				}
 				throwError(error)
 			}
@@ -37,19 +37,19 @@ class UserController {
 		}
 	}
 
-  async login(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
+	async login(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
 		const { email, password } = req.body
 
 		try {
 			const userFromDB = await userServices.getOneUser({ email })
 			await validateLogin(userFromDB, password)
-	
+
 			const userObject: NewUser | undefined = userFromDB?.toObject()
 			if (userObject) {
 				delete userObject.password
-	
+
 				const token = createToken(userObject)
-			
+
 				res.status(200).json(token)
 			}
 		} catch (error: any) {
@@ -57,11 +57,11 @@ class UserController {
 			next(error)
 		}
 	}
-	
-	async verify(req: PayloadRequest, res: RouteProps['res'], next: RouteProps['next']) {
+
+	async verify(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		try {
 			const decodedToken = req.payload
-			
+
 			res.status(200).json(decodedToken)
 		} catch (error: any) {
 			error.place = 'Verify'

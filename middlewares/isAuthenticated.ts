@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken"
-import { PayloadRequest, RouteProps } from "../utils/types"
+import { RouteProps } from "../utils/types"
 import { throwError } from "../utils/throwError"
 
 
-export const isAuthenticated = (req: PayloadRequest, res: RouteProps['res'], next: RouteProps['next']) => {
+export const isAuthenticated = (req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) => {
   try {
     const bearer = req.headers.authorization
     if (bearer) {

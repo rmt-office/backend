@@ -2,7 +2,7 @@ import { User } from "../models/User.model"
 import { validatePassword } from "./passwordHandlers"
 import { throwError } from "./throwError"
 
-export const checkRequiredInput = (email: string, password: string) => {
+export const checkRequiredInput = (email: string, password: string, confirmPassword: string) => {
   if (!email && !password) {
     const error = {
       message: 'Email and Password are required',
@@ -36,6 +36,14 @@ export const checkRequiredInput = (email: string, password: string) => {
   }
 
   if (password) {
+    if (password !== confirmPassword) {
+      const error = {
+        message: `The passwords don't match`,
+        status: 400,
+      }
+      throwError(error)
+    }
+
     const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
     const isValid = password.match(passwordRegex)
     if (!isValid) {
