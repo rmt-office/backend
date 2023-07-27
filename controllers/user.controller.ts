@@ -14,7 +14,7 @@ class UserController {
 			checkRequiredInput(email, password)
 			username = checkUsername(username, email)
 
-			const userFromDB = await UserServices.getOneUser({ username })
+			const userFromDB = await UserServices.getOneUser({ email })
 			if (userFromDB) {
 				const error = {
 					message: 'User already exists',

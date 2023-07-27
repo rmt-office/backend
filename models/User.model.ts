@@ -14,8 +14,7 @@ const userSchema = new Schema(
 		email: {
 			type: String,
 			required: true,
-			// maybe create a helper function or use zod
-			match: /^\S+@\S+\.\S+$/, 
+			match: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, 
 			trim: true,
 			unique: true,
 			lowercase: true
@@ -23,6 +22,7 @@ const userSchema = new Schema(
 		password: {
 			type: String,
 			required: true,
+			match: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
 		},
 		username: {
 			type: String,

@@ -22,6 +22,30 @@ export const checkRequiredInput = (email: string, password: string) => {
     }
     throwError(error)
   }
+
+  if (email) {
+    const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
+    const isValid = email.match(emailRegex)
+    if (!isValid) {
+      const error = {
+        message: 'Please fill in a valid email',
+        status: 400,
+      }
+      throwError(error)
+    }
+  }
+
+  if (password) {
+    const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
+    const isValid = password.match(passwordRegex)
+    if (!isValid) {
+      const error = {
+        message: 'Please use a password with at least eight characters, one upper case, lower case, one number and one special character',
+        status: 400,
+      }
+      throwError(error)
+    }
+  }
 }
 
 export const checkUsername = (username: string, email: string) => {
