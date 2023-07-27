@@ -1,3 +1,5 @@
+import { User } from "../models/User.model"
+import { validatePassword } from "./passwordHandlers"
 import { throwError } from "./throwError"
 
 export const checkRequiredInput = (email: string, password: string) => {
@@ -29,3 +31,22 @@ export const checkUsername = (username: string, email: string) => {
 
   return username
 }
+
+export const validateLogin = async (user: User | null, passwordCandidate: string) => { 
+  if (user) {
+    const isValid = await validatePassword(passwordCandidate, user.password)
+    if (!isValid) {
+      const error = {
+        message: 'Email and/or password is incorrect',
+        status: 400
+      }
+      throwError(error)
+    }
+  } else {
+    const error = {
+      message: 'Email and/or password is incorrect',
+      status: 400
+    }
+    throwError(error)
+  }
+} 

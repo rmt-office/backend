@@ -1,8 +1,8 @@
 import userServices, { NewUser } from '../services/User.services'
-import { checkRequiredInput, checkUsername } from '../utils/checkUserInput'
+import { checkRequiredInput, checkUsername, validateLogin } from '../utils/checkUserInfo'
 import { throwError } from '../utils/throwError'
 import { RouteProps } from '../utils/types'
-import { hashPassword } from '../utils/passwordHandlers'
+import { hashPassword, validatePassword } from '../utils/passwordHandlers'
 import UserServices from '../services/User.services'
 
 class UserController {
@@ -41,6 +41,8 @@ class UserController {
 
 		try {
 			const userFromDB = await userServices.getOneUser({ email })
+
+			await validateLogin(userFromDB, password)
 
 			res.status(200).json(userFromDB)
 		} catch (error: any) {
