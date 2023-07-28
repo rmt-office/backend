@@ -17,4 +17,6 @@ export type RouteProps = {
 	payload: Request & { payload?: jwt.JwtPayload }
 }
 
-export type NewUser = Overwrite<Pick<User, 'username' | 'password' | 'email'>, { password?: string, _id?: string }>
+export type NewUser = Overwrite<Pick<User, 'username' | 'password' | 'email' >, { password?: string, _id?: string }>
+
+export type UpdateProps =  { filter: {}; infoUpdate: {}; options?: {} }

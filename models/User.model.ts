@@ -6,6 +6,7 @@ interface User {
 	username?: string
 	isAdmin: boolean
 	profileImage: string
+	isVerified: boolean
 	favorites: Types.ObjectId[]
 }
 
@@ -27,6 +28,14 @@ const userSchema = new Schema(
 		username: {
 			type: String,
 			unique: true
+		},
+		isVerified: {
+			type: Boolean,
+			default: false
+		},
+		isAdmin: {
+			type: Boolean,
+			default: false
 		},
 		favorites: [
 			{

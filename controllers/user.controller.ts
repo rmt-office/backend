@@ -1,10 +1,11 @@
 import userServices from '../services/User.services'
 import { checkRequiredInput, checkUsername, validateLogin } from '../utils/checkUserInfo'
 import { throwError } from '../utils/throwError'
-import { NewUser, RouteProps } from '../utils/types'
+import { NewUser, RouteProps, UpdateProps } from '../utils/types'
 import { hashPassword } from '../utils/passwordHandlers'
 import { createToken } from '../utils/tokenHandler'
 import UserServices from '../services/User.services'
+import { sendMail, transporter } from '../utils/nodemailer'
 
 class UserController {
 	async signup(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
@@ -22,13 +23,15 @@ class UserController {
 				}
 				throwError(error)
 			}
-
+			
 			const passwordHash = await hashPassword(password)
 
 			const createdUser = await userServices.createUser({ username, email, password: passwordHash })
 			const newUser: NewUser = createdUser.toObject()
 
 			delete newUser.password
+
+		  await sendMail(email, newUser)
 
 			res.status(201).json(newUser)
 		} catch (error: any) {
@@ -67,6 +70,30 @@ class UserController {
 			error.place = 'Verify'
 			next(error)
 		}
+	}
+
+	async emailVerification(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
+		const { id } = req.params
+		try {
+			const updateVerify = {
+				filter: {
+					_id: id,
+				},
+				infoUpdate: {
+					isVerified: true
+				},
+				options: {
+					new: true
+				}
+			}
+			const user = await userServices.findOneAndUpdate(updateVerify)
+
+			res.status(200).json({ message: 'Your email was successfully verified'})
+		} catch (error: any) {
+			error.place = 'Email verification'
+			next(error)
+		}
+		
 	}
 }
 

@@ -74,6 +74,13 @@ export const validateLogin = async (user: User | null, passwordCandidate: string
       }
       throwError(error)
     }
+    if (!user.isVerified) {
+      const error = {
+        message: 'Not verified',
+        status: 400
+      }
+      throwError(error)
+    }
   } else {
     const error = {
       message: 'Email and/or password is incorrect',

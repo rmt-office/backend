@@ -6,6 +6,7 @@ const router = Router()
 
 router.post('/signup', userController.signup)
 router.post('/login', userController.login)
-router.get('/verify', isAuthenticated ,userController.verify)
+router.get('/verify', isAuthenticated, userController.verify)
+router.get('/:id', userController.emailVerification)
 
 export default router

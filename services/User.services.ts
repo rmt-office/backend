@@ -1,6 +1,6 @@
 import { UserModel, User }  from "../models/User.model";
-import { create, findAll, findOne } from "../mongoose/mongooseServices";
-import { NewUser } from "../utils/types";
+import { create, findAll, findOne, findOneAndUpdate } from "../mongoose/mongooseServices";
+import { NewUser, UpdateProps } from "../utils/types";
 
  class UserService {
   async createUser(user: NewUser) {
@@ -13,6 +13,10 @@ import { NewUser } from "../utils/types";
 
   async getOneUser(filter: {}) {
     return findOne(UserModel, filter)
+  }
+
+  async findOneAndUpdate(updateInfo: UpdateProps) {
+    return findOneAndUpdate(UserModel, updateInfo)
   }
 }
 
