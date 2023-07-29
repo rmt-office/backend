@@ -11,9 +11,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
+    //@ts-expect-error
     folder: 'remote-office',
     allowedFormats: ['jpg']
-
   }
 })
 
