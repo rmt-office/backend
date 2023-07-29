@@ -86,7 +86,7 @@ class UserController {
 					new: true
 				}
 			}
-			const user = await userServices.findOneAndUpdate(updateVerify)
+			await userServices.findOneAndUpdate(updateVerify)
 
 			res.status(200).json({ message: 'Your email was successfully verified'})
 		} catch (error: any) {
