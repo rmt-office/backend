@@ -1,4 +1,5 @@
 import { Schema, model, Types } from 'mongoose'
+import { Overwrite } from '../utils/types'
 
 interface User {
 	email: string 
@@ -9,6 +10,9 @@ interface User {
 	isVerified: boolean
 	favorites: Types.ObjectId[]
 }
+
+type UserPick = Pick<User, 'username' | 'password' | 'email' >
+export type NewUser = Overwrite<UserPick, { password?: string, _id?: string }>
 
 const userSchema = new Schema(
 	{
