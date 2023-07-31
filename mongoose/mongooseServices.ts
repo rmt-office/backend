@@ -15,7 +15,11 @@ export const findOne = <TModel>(model: Model<TModel>, filter: {}) => {
 
 export const findOneAndUpdate = <TModel>(
 	model: Model<TModel>,
-	update: UpdateProps
+	{ filter, infoUpdate, options }: UpdateProps
 ) => {
-	return model.findOneAndUpdate(update.filter, update.infoUpdate, update?.options)
+	return model.findOneAndUpdate(filter, infoUpdate, options)
+}
+
+export const deleteOne = <TModel>(model: Model<TModel>, filter: {}) => {
+	return model.deleteOne(filter)
 }
