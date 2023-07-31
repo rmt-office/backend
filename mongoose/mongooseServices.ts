@@ -21,5 +21,5 @@ export const findOneAndUpdate = <TModel>(
 }
 
 export const deleteOne = <TModel>(model: Model<TModel>, filter: {}) => {
-	return model.deleteOne(filter)
+	return model.findOneAndDelete(filter)
 }
