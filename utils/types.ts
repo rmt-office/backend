@@ -8,12 +8,14 @@ export interface ErrorProps {
 	status: number
 }
 
+interface PayloadOptions extends jwt.JwtPayload { email?: string, _id?: string, username?: string }
+
 export type RouteProps = {
 	req: Request
 	res: Response
 	error: ErrorProps
 	next: NextFunction
-	payload: Request & { payload?: jwt.JwtPayload }
+	payload: Request & { payload: PayloadOptions }
 }
 
 export type UpdateProps =  { filter: {}; infoUpdate: {}; options?: {} }
