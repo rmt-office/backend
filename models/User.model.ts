@@ -1,4 +1,4 @@
-import { Schema, model, Types } from 'mongoose'
+import { Schema, model, Types, Model } from 'mongoose'
 import { Overwrite } from '../utils/types'
 
 interface User {

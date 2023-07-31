@@ -1,11 +1,12 @@
 import userServices from '../services/User.services'
 import { checkRequiredInput, checkUsername, validateLogin } from '../utils/checkUserInfo'
 import { throwError } from '../utils/throwError'
-import { NewUser, RouteProps, UpdateProps } from '../utils/types'
+import { RouteProps } from '../utils/types'
 import { hashPassword } from '../utils/passwordHandlers'
 import { createToken } from '../utils/tokenHandler'
 import UserServices from '../services/User.services'
-import { sendMail, transporter } from '../utils/nodemailer'
+import { sendMail } from '../utils/nodemailer'
+import { NewUser } from '../models/User.model'
 
 class UserController {
 	async signup(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
@@ -47,7 +48,7 @@ class UserController {
 			const userFromDB = await userServices.getOneUser({ email })
 			await validateLogin(userFromDB, password)
 
-			const userObject: NewUser | undefined = userFromDB?.toObject()
+			const userObject: NewUser  = userFromDB!.toObject()
 			if (userObject) {
 				delete userObject.password
 
@@ -87,13 +88,32 @@ class UserController {
 				}
 			}
 			await userServices.findOneAndUpdate(updateVerify)
-
+			// TODO: change to an HTML response with a successfull response
 			res.status(200).json({ message: 'Your email was successfully verified'})
 		} catch (error: any) {
 			error.place = 'Email verification'
 			next(error)
 		}
-		
+	}
+
+	async update(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+	}
+
+	async delete(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+		try {
+			const user = await userServices.deleteOne({ _id: req.payload!._id! })
+			if (user === null) {
+				const error = {
+					message: 'User already deleted',
+					status: 400
+				}
+				throwError(error)
+			}
+			res.status(204).json()
+		} catch (error: any) {
+			error.place = 'Delete an user'
+			next(error)
+		}
 	}
 }
 
