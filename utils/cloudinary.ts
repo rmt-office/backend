@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
   params: {
     //@ts-expect-error
     folder: 'remote-office',
-    allowedFormats: ['jpg']
+    allowedFormats: ['jpg',]
   }
 })
 
