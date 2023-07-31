@@ -2,7 +2,14 @@ import { User } from "../models/User.model"
 import { validatePassword } from "./passwordHandlers"
 import { throwError } from "./throwError"
 
-export const checkRequiredInput = (email: string, password: string, confirmPassword: string) => {
+export const checkRequiredInput = (email: string, password: string, confirmPassword: string, oldPassword?: string) => {
+  if (oldPassword !== undefined) {
+    if (oldPassword === password) {
+      throw new Error('same pass')
+    }
+    if (oldPassword === '')
+    throw new Error('old pass')
+  }
   if (!email && !password) {
     const error = {
       message: 'Email and Password are required',

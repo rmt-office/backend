@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import { NewUser } from './types'
+import { NewUser } from '../models/User.model'
 
 export const transporter = nodemailer.createTransport({
   service: 'Gmail',

@@ -15,7 +15,7 @@ class UserController {
 		try {
 			checkRequiredInput(email, password, confirmPassword)
 			username = checkUsername(username, email)
-
+			// TODO: Check the user for unique username?
 			const userFromDB = await UserServices.getOneUser({ email })
 			if (userFromDB) {
 				const error = {
@@ -78,6 +78,7 @@ class UserController {
 		try {
 			const updateVerify = {
 				filter: {
+					// TODO: Change to random number
 					_id: id,
 				},
 				infoUpdate: {
@@ -97,6 +98,25 @@ class UserController {
 	}
 
 	async update(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+		/*
+			username => email confirmation ? 
+				=> username exists?
+				=> When was the last change? 
+				=> new username is unique? 
+
+			email => email confirmation ?
+				=> email exists?
+				=> email is valid?
+				=> new email is unique?
+
+			password - never send the password to the client => email confirmation ? 
+				=> Check the old password exists 
+				=> Check for the same string
+				=> Double checking of new password
+			photo
+			favorites
+		*/
+		res.status(200).json(req.body)
 	}
 
 	async delete(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {

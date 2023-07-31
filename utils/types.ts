@@ -15,7 +15,7 @@ export type RouteProps = {
 	res: Response
 	error: ErrorProps
 	next: NextFunction
-	payload: Request & { payload: PayloadOptions }
+	payload: Request & { payload?: PayloadOptions }
 }
 
 export type UpdateProps =  { filter: {}; infoUpdate: {}; options?: {} }
