@@ -9,7 +9,7 @@ type UpdateOptions<TModel> = UpdateProps<HydratedDocument<TModel>>
 
 export type UpdateProps<T> =  { 
 	filter: FilterQuery<FilterConstraint<InferSchemaType<T>> & { _id: string }>
-	infoUpdate: UpdateQuery<T>
+	infoUpdate: UpdateQuery<T> | FilterConstraint<InferSchemaType<T>>
 	options?: QueryOptions<T>
 }
 

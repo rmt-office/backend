@@ -5,6 +5,6 @@ import { isAuthenticated } from "../middlewares/isAuthenticated";
 const router = Router()
 
 router.put('/', isAuthenticated, userController.update)
-router.delete('/delete', isAuthenticated, userController.delete)
+router.delete('/', isAuthenticated, userController.delete)
 
 export default router

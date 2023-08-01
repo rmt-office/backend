@@ -1,30 +1,30 @@
 import userServices from '../services/User.services'
-import { checkRequiredInput, checkUsername, validateLogin } from '../utils/checkUserInfo'
-import { throwError } from '../utils/throwError'
+import { checkEmailInput, checkEmailRegex, checkPasswordInput, checkRequiredInput, checkUsername, checkUsernameForUpdate, validateLogin } from '../utils/checkUserInfo'
+import { createError, throwError } from '../utils/throwError'
 import { RouteProps } from '../utils/types'
-import { hashPassword } from '../utils/passwordHandlers'
+import { hashPassword, validatePassword } from '../utils/passwordHandlers'
 import { createToken } from '../utils/tokenHandler'
-import UserServices from '../services/User.services'
 import { sendMail } from '../utils/nodemailer'
 import { NewUser } from '../models/User.model'
 
+
+type InputType = {
+	email: string, password: string, confirmPassword: string, username: string
+}
 class UserController {
 	async signup(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
-		const { email, password, confirmPassword } = req.body
-		let { username } = req.body
+		const { email, password, confirmPassword }: InputType = req.body
+		let { username }: InputType = req.body
 		try {
 			checkRequiredInput(email, password, confirmPassword)
 			username = checkUsername(username, email)
 			// TODO: Check the user for unique username?
-			const userFromDB = await UserServices.getOneUser({ email })
+			const userFromDB = await userServices.getOneUser({ $or: [{ email }, { username }] })
 			if (userFromDB) {
-				const error = {
-					message: 'User already exists',
-					status: 400,
-				}
+				const error = createError('User already exists', 400)
 				throwError(error)
 			}
-			
+
 			const passwordHash = await hashPassword(password)
 
 			const createdUser = await userServices.createUser({ username, email, password: passwordHash })
@@ -32,7 +32,7 @@ class UserController {
 
 			delete newUser.password
 
-		  await sendMail(email, newUser)
+			await sendMail(email, newUser)
 
 			res.status(201).json(newUser)
 		} catch (error: any) {
@@ -48,7 +48,7 @@ class UserController {
 			const userFromDB = await userServices.getOneUser({ email })
 			await validateLogin(userFromDB, password)
 
-			const userObject: NewUser  = userFromDB!.toObject()
+			const userObject: NewUser = userFromDB!.toObject()
 			if (userObject) {
 				delete userObject.password
 
@@ -90,7 +90,7 @@ class UserController {
 			}
 			await userServices.findOneAndUpdate(updateVerify)
 			// TODO: change to an HTML response with a successfull response
-			res.status(200).json({ message: 'Your email was successfully verified'})
+			res.status(200).json({ message: 'Your email was successfully verified' })
 		} catch (error: any) {
 			error.place = 'Email verification'
 			next(error)
@@ -98,40 +98,76 @@ class UserController {
 	}
 
 	async update(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
-		/*
-			username => email confirmation ? 
-				=> username exists?
-				=> When was the last change? 
-				=> new username is unique? 
+		const { username, email, password, confirmPassword, currentPassword } = req.body
+		try {
+			const user = await userServices.getOneUser({ email: req.payload!.email })
+			let updatedUser 
 
-			email => email confirmation ?
-				=> email exists?
-				=> email is valid?
-				=> new email is unique?
+			if (user) {
+				if (password) {			
+					const validChanges = await validatePassword(currentPassword, user.password)
 
-			password - never send the password to the client => email confirmation ? 
-				=> Check the old password exists 
-				=> Check for the same string
-				=> Double checking of new password
-			photo
-			favorites
-		*/
-		res.status(200).json(req.body)
+					if(!validChanges) {
+						const error = createError('Invalid credentials', 400)
+						throwError(error)
+					}
+
+					checkPasswordInput(password, confirmPassword)
+
+					const newPassword = await hashPassword(password)
+					updatedUser = await userServices.findOneAndUpdate({
+						filter: { _id: req.payload!._id },
+						infoUpdate: { password: newPassword },
+						options: { new: true, runValidators: true }
+					})
+				}
+
+				if (email) {
+					const validChanges = await validatePassword(currentPassword, user.password)
+
+					if(!validChanges) {
+						const error = createError('Invalid credentials', 400)
+						throwError(error)
+					}
+
+					checkEmailInput(email)
+					const newInfo = { username, email }
+
+					let newUpdatableDate = checkUsernameForUpdate(user, username)
+
+					updatedUser = await userServices.findOneAndUpdate({
+						filter: { _id: req.payload!._id },
+						infoUpdate: { ...newInfo, canUpdateOn: newUpdatableDate },
+						options: { new: true, runValidators: true }
+					})
+				}
+
+				const withoutPassword: NewUser = updatedUser!.toObject()
+				delete withoutPassword.password
+				
+				const token = createToken(withoutPassword) 
+
+				res.status(200).json(token)
+			}
+		} catch (error: any) {
+			error.place = 'Update user'
+			next(error)
+		}
+
+
+
 	}
 
 	async delete(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		try {
 			const user = await userServices.deleteOne({ _id: req.payload!._id! })
 			if (user === null) {
-				const error = {
-					message: 'User already deleted',
-					status: 400
-				}
+				const error = createError('User already deleted', 400)
 				throwError(error)
 			}
 			res.status(204).json()
 		} catch (error: any) {
-			error.place = 'Delete an user'
+			error.place = 'Delete user'
 			next(error)
 		}
 	}
