@@ -1,8 +1,8 @@
-import { UserModel, NewUser }  from "../models/User.model";
-import { create, deleteOne, findAll, findOne, findOneAndUpdate } from "../mongoose/mongooseServices";
-import { UpdateProps } from "../utils/types";
+import { UserModel, NewUser, UserInfer }  from "../models/User.model";
+import { UpdateProps, create, deleteOne, findAll, findOne, findOneAndUpdate } from "../mongoose/mongooseServices";
 
-type DeleteOptions = { _id: string } | { username: string } | { email: string }
+type UpdateOptions = UpdateProps<UserInfer>
+type FilterOptions = UpdateOptions['filter']
 
  class UserService {
   async createUser(user: NewUser) {
@@ -13,15 +13,15 @@ type DeleteOptions = { _id: string } | { username: string } | { email: string }
     return findAll(UserModel)
   }
 
-  async getOneUser(filter: { email: string }) {
+  async getOneUser(filter: FilterOptions) {
     return findOne(UserModel, filter)
   }
 
-  async findOneAndUpdate(updateInfo: UpdateProps) {
+  async findOneAndUpdate(updateInfo: UpdateOptions) {
     return findOneAndUpdate(UserModel, updateInfo)
   }
 
-  async deleteOne(id: DeleteOptions) {
+  async deleteOne(id: FilterOptions) {
     return deleteOne(UserModel, id)
   }
 }
