@@ -18,4 +18,3 @@ export type RouteProps = {
 	payload: Request & { payload?: PayloadOptions }
 }
 
-export type UpdateProps =  { filter: {}; infoUpdate: {}; options?: {} }

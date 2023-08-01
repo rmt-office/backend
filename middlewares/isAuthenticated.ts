@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 import { RouteProps } from "../utils/types"
-import { throwError } from "../utils/throwError"
+import { createError, throwError } from "../utils/throwError"
 
 
 export const isAuthenticated = (req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) => {
@@ -14,19 +14,13 @@ export const isAuthenticated = (req: RouteProps['payload'], res: RouteProps['res
         req.payload = { ...decodedToken as jwt.JwtPayload }
         next()
       } else {
-        const error = {
-          message: 'Token not found',
-          status: 401
-        }
+        const error = createError('Token not found', 401)
         throwError(error)
-      } 
-    } else {
-      const error = {
-        message: 'Headers and/or authorization not found',
-        status: 401
       }
+    } else {
+      const error = createError('Headers and/or authorization not found', 401)
       throwError(error)
-    } 
+    }
   } catch (error: any) {
     error.place = 'JWT middleware'
     if (error.message === 'invalid signature') {
