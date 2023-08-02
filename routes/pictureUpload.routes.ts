@@ -9,7 +9,7 @@ router.post('/picture', upload.single('image'), (req, res, next) => {
     if (req.file) {
       res.status(200).json(req.file.path)
     } else {
-      res.status(204).json()
+      res.sendStatus(204)
     }
   } catch (error: any) {
     error.place = 'File upload'

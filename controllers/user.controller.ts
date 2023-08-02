@@ -6,6 +6,8 @@ import { hashPassword, validatePassword } from '../utils/passwordHandlers'
 import { createToken } from '../utils/tokenHandler'
 import { sendMail } from '../utils/nodemailer'
 import { NewUser } from '../models/User.model'
+import { trusted } from 'mongoose'
+import { profile } from 'console'
 
 
 type InputType = {
@@ -101,13 +103,13 @@ class UserController {
 		const { username, email, password, confirmPassword, currentPassword } = req.body
 		try {
 			const user = await userServices.getOneUser({ email: req.payload!.email })
-			let updatedUser 
+			let updatedUser
 
 			if (user) {
-				if (password) {			
+				if (password) {
 					const validChanges = await validatePassword(currentPassword, user.password)
 
-					if(!validChanges) {
+					if (!validChanges) {
 						const error = createError('Invalid credentials', 400)
 						throwError(error)
 					}
@@ -125,7 +127,7 @@ class UserController {
 				if (email) {
 					const validChanges = await validatePassword(currentPassword, user.password)
 
-					if(!validChanges) {
+					if (!validChanges) {
 						const error = createError('Invalid credentials', 400)
 						throwError(error)
 					}
@@ -144,8 +146,8 @@ class UserController {
 
 				const withoutPassword: NewUser = updatedUser!.toObject()
 				delete withoutPassword.password
-				
-				const token = createToken(withoutPassword) 
+
+				const token = createToken(withoutPassword)
 
 				res.status(200).json(token)
 			}
@@ -154,6 +156,33 @@ class UserController {
 			next(error)
 		}
 
+	}
+
+	async updatePhoto(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+		const { _id } = req.payload!
+		const { profilePicture } = req.body
+
+		try {
+			if (!profilePicture) {
+				const error = createError('You must send a picture url', 400)
+				throwError(error)
+			}
+			
+			const updatedUser = await userServices.findOneAndUpdate({
+				filter: { _id: _id }, 
+				infoUpdate: { profilePicture }, 
+				options: { new: true, fields: '-password' }
+			})
+
+			res.status(200).json(updatedUser)
+		} catch (error: any) {
+			error.place = 'Profile photo update'
+			next(error)
+		}
+	}
+
+	async updateFavorites(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+		// TODO: Implement update favorites after places are created
 	}
 
 	async delete(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {

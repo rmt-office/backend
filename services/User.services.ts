@@ -13,8 +13,8 @@ type FilterOptions = UpdateOptions['filter']
     return findAll(UserModel)
   }
 
-  async getOneUser(filter: FilterOptions) {
-    return findOne(UserModel, filter)
+  async getOneUser(filter: FilterOptions, options?: UpdateOptions['options']) {
+    return findOne(UserModel, filter, options)
   }
 
   async findOneAndUpdate(updateInfo: UpdateOptions) {

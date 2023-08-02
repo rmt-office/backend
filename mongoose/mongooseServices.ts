@@ -21,8 +21,8 @@ export const findAll = <TModel>(model: Model<TModel>) => {
 	return model.find()
 }
 
-export const findOne = <TModel>(model: Model<TModel>, filter: FilterOptions<TModel>) => {
-	return model.findOne(filter)
+export const findOne = <TModel>(model: Model<TModel>, filter: FilterOptions<TModel>, options?: UpdateOptions<TModel>['options'] ) => {
+	return model.findOne(filter, options)
 }
 
 export const findOneAndUpdate = <TModel>(
