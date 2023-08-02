@@ -4,6 +4,7 @@ type FilterConstraint<TDoc> = {
 	[Prop in keyof TDoc]: TDoc[Prop]
 }
 
+type QueryOpts<TModel> = UpdateProps<HydratedDocument<TModel>>['options']
 type FilterOptions<TModel> = UpdateProps<HydratedDocument<TModel>>['filter']
 type UpdateOptions<TModel> = UpdateProps<HydratedDocument<TModel>>
 
@@ -17,11 +18,14 @@ export const create = <TModel, TCreate>(model: Model<TModel>, create: TCreate) =
 	return model.create(create)
 }
 
-export const findAll = <TModel>(model: Model<TModel>) => {
-	return model.find()
+export const find = <TModel>(model: Model<TModel>, filter?: FilterOptions<TModel>, options?: QueryOpts<TModel>) => {
+	if (filter) {
+		return model.find(filter, {}, options)	
+	}
+	return model.find({}, {}, options)
 }
 
-export const findOne = <TModel>(model: Model<TModel>, filter: FilterOptions<TModel>, options?: UpdateOptions<TModel>['options'] ) => {
+export const findOne = <TModel>(model: Model<TModel>, filter: FilterOptions<TModel>, options?: QueryOpts<TModel>) => {
 	return model.findOne(filter, options)
 }
 
