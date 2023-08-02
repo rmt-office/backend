@@ -6,9 +6,6 @@ import { hashPassword, validatePassword } from '../utils/passwordHandlers'
 import { createToken } from '../utils/tokenHandler'
 import { sendMail } from '../utils/nodemailer'
 import { NewUser } from '../models/User.model'
-import { trusted } from 'mongoose'
-import { profile } from 'console'
-
 
 type InputType = {
 	email: string, password: string, confirmPassword: string, username: string
