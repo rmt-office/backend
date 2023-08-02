@@ -1,4 +1,5 @@
 import { Schema, model, HydratedDocument, InferSchemaType } from 'mongoose'
+import { Overwrite } from '../utils/types'
 
 const placeSchema = new Schema(
   {
@@ -75,5 +76,6 @@ const placeSchema = new Schema(
 const PlaceModel = model('Place', placeSchema) 
 type Place = InferSchemaType<typeof placeSchema>
 type PlaceHydrate = HydratedDocument<typeof placeSchema>
+type NewPlace = Overwrite<Place, { _id?: string }>
 
-export { PlaceModel, Place, PlaceHydrate }
+export { PlaceModel, Place, PlaceHydrate, NewPlace }
