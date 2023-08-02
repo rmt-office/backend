@@ -154,13 +154,11 @@ class UserController {
 			next(error)
 		}
 
-
-
 	}
 
 	async delete(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		try {
-			const user = await userServices.deleteOne({ _id: req.payload!._id! })
+			const user = await userServices.deleteOne({ _id: req.payload!._id })
 			if (user === null) {
 				const error = createError('User already deleted', 400)
 				throwError(error)

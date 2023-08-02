@@ -62,10 +62,10 @@ export const validateLogin = async (user: User | null, passwordCandidate: string
       const error = createError('Invalid credentials', 400)
       throwError(error)
     }
-    // if (!user.isVerified) {
-    //   const error =  createError('User isn't verified yet', 400)
-    //   throwError(error)
-    // }
+    if (!user.isVerified) {
+      const error =  createError(`User isn't verified yet`, 400)
+      throwError(error)
+    }
   } else {
     const error = createError('Invalid credentials', 400)
     throwError(error)

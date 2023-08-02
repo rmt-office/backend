@@ -7,8 +7,6 @@ type NewUser = Overwrite<UserPick, { password?: string, _id?: string }>
 
 const userSchema = new Schema(
 	{
-		// TODO: Username last update
-		// TODO: Update Object for email confirmation
 		email: {
 			type: String,
 			required: true,
