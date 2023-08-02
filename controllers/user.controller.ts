@@ -1,4 +1,4 @@
-import userServices from '../services/User.services'
+import userServices from '../services/User.service'
 import { checkEmailInput, checkEmailRegex, checkPasswordInput, checkRequiredInput, checkUsername, checkUsernameForUpdate, validateLogin } from '../utils/checkUserInfo'
 import { createError, throwError } from '../utils/throwError'
 import { RouteProps } from '../utils/types'

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import authRoutes from './routes/auth.routes'
 import userRoutes from './routes/user.routes'
+import placesRoutes from './routes/places.routes'
 import { errorHandling } from "./routes/errorHandling";
 import { RouteProps } from "./utils/types";
 import pictureUpload from './routes/pictureUpload.routes'
@@ -9,6 +10,7 @@ const router = Router()
 
 router.use('/auth', authRoutes)
 router.use('/user', userRoutes)
+router.use('/places', placesRoutes)
 
 router.use('/api', pictureUpload)
 
