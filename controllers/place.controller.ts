@@ -37,38 +37,76 @@ class PlaceController {
 			next(error)
 		}
 	}
+
 	async getAll(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		try {
-			res.status(200).json({ message: 'it works get all' })
+			const places = await placeServices.findAll()
+			res.status(200).json(places)
 		} catch (error: any) {
 			error.place = 'Get all places'
 			next(error)
 		}
 	}
+
 	async getByFilters(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+		const { tags } = req.body
+		const tagsRenamed: {[key: string]: boolean} = {}
+		for (let tag in tags) {
+			const newName = `tags.${tag}`
+			tagsRenamed[newName] = tags[tag]
+		}
+		delete req.body.tags
+
 		try {
-			res.status(200).json({ message: 'it works filters' })
+			const filtered = await placeServices.findByFilters({...req.body, ...tagsRenamed})
+			res.status(200).json(filtered)
 		} catch (error: any) {
 			error.place = 'Get place by filtering'
 			next(error)
 		}
 	}
+
 	async getOne(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+		const { id } = req.params
 		try {
-			res.status(200).json({ message: 'it works get one' })
+			const place = await placeServices.findOne({ _id: id})
+			res.status(200).json(place)
 		} catch (error: any) {
 			error.place = 'Get one place'
 			next(error)
 		}
 	}
+
 	async update(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+		const { id } = req.params
+		const placeToUpdate: Omit<NewPlace, 'creator'> = {
+			name: req.body.name,
+			category: req.body.category,
+			contactInfo: req.body.contactInfo,
+			price: req.body.price,
+			meetingRoom: req.body.meetingRoom,
+			bathrooms: req.body.bathrooms,
+			description: req.body.description,
+			wifiSpeed: req.body.wifiSpeed,
+			isPrivate: req.body.isPrivate,
+			tags: req.body.tags,
+			ownership: req.body.ownership,
+			photos: req.body.photos,
+			address: req.body.address,
+		}
 		try {
-			res.status(200).json({ message: 'it works update' })
+			const updatedPlace = await placeServices.findOneAndUpdate({
+				filter: { _id: id },
+				infoUpdate: placeToUpdate,
+				options: { new: true, runValidators: true },
+			})
+			res.status(200).json(updatedPlace)
 		} catch (error: any) {
 			error.place = 'Update place'
 			next(error)
 		}
 	}
+
 	async delete(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		const { id } = req.params
 		try {
