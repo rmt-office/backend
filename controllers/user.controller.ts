@@ -53,7 +53,7 @@ class UserController {
 
 				const token = createToken(userObject)
 
-				res.status(200).json(token)
+				res.status(200).json({token})
 			}
 		} catch (error: any) {
 			error.place = 'Login'
@@ -146,7 +146,7 @@ class UserController {
 
 				const token = createToken(withoutPassword)
 
-				res.status(200).json(token)
+				res.status(200).json({token})
 			}
 		} catch (error: any) {
 			error.place = 'Update user'

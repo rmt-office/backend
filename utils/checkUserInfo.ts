@@ -1,5 +1,5 @@
 import dayjs from "dayjs"
-import { User, UserInfer } from "../models/User.model"
+import { User } from "../models/User.model"
 import { validatePassword } from "./passwordHandlers"
 import { createError, throwError } from "./throwError"
 

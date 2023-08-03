@@ -1,34 +1,41 @@
-import { NewPlace, Place, PlaceHydrate, PlaceModel } from "../models/Place.model";
-import { UpdateProps, create, deleteOne, find, findOne, findOneAndUpdate } from "../mongoose/mongooseServices";
+import { NewPlace, Place, PlaceHydrate, PlaceModel } from '../models/Place.model'
+import {
+	UpdateProps,
+	create,
+	deleteOne,
+	find,
+	findOne,
+	findOneAndUpdate,
+} from '../mongoose/mongooseServices'
 
 type UpdateOptions = UpdateProps<PlaceHydrate>
 type FilterOptions = UpdateOptions['filter']
 type QueryOptions = UpdateOptions['options']
 
 class PlaceServices {
-  async createPlace(newPlace: Place) {
-    return create(PlaceModel, newPlace)
-  }
+	async createPlace(newPlace: NewPlace) {
+		return create(PlaceModel, newPlace)
+	}
 
-  async findAll() {
-    return find(PlaceModel)
-  }
+	async findAll() {
+		return find(PlaceModel)
+	}
 
-  async findByFilters(filter: FilterOptions, options?: QueryOptions) {
-    return find(PlaceModel, filter, options)
-  }
+	async findByFilters(filter: FilterOptions, options?: QueryOptions) {
+		return find(PlaceModel, filter, options)
+	}
 
-  async findOne(filter: FilterOptions, options?: QueryOptions) {
-    return findOne(PlaceModel, filter, options)
-  }
+	async findOne(filter: FilterOptions, options?: QueryOptions) {
+		return findOne(PlaceModel, filter, options)
+	}
 
-  async findOneAndUpdate(updateOptions: UpdateOptions) {
-    return findOneAndUpdate(PlaceModel, updateOptions)
-  }
+	async findOneAndUpdate(updateOptions: UpdateOptions) {
+		return findOneAndUpdate(PlaceModel, updateOptions)
+	}
 
-  async deleteOne(filter: FilterOptions) {
-    return deleteOne(PlaceModel, filter)
-  }
+	async deleteOne(filter: FilterOptions) {
+		return deleteOne(PlaceModel, filter)
+	}
 }
 
 export default new PlaceServices()

@@ -18,3 +18,4 @@ export type RouteProps = {
 	payload: Request & { payload?: PayloadOptions }
 }
 
+export type Timestamps = { createdAt: NativeDate, updatedAt: NativeDate }
