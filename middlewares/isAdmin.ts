@@ -8,14 +8,11 @@ export const isAdmin = async (
 	next: RouteProps['next']
 ) => {
 	const { _id } = req.payload!
-	const { path } = req
-
-	console.log(path)
 
   try {
     const user = await UserService.getOneUser({ _id })
     if (!user!.isAdmin) {
-      const error = createError(`You don't have the rights to delete`, 401)
+      const error = createError(`You don't have the rights to do that`, 403)
       throwError(error)
     } 
     next()

@@ -10,7 +10,7 @@ router.post('/', placeController.create)
 router.get('/', placeController.getAll)
 router.get('/filter', placeController.getByFilters)
 router.get('/:id', placeController.getOne)
-router.put('/:id', placeController.update)
+router.put('/:id', isAdmin, placeController.update)
 router.delete('/:id', isAdmin, placeController.delete)
 
 export default router

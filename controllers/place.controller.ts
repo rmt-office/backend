@@ -2,6 +2,7 @@ import { RouteProps } from '../utils/types'
 import { NewPlace } from '../models/Place.model'
 import placeServices from '../services/Place.service'
 import { checkRequired } from '../utils/checkInput'
+import { createError, throwError } from '../utils/throwError'
 
 class PlaceController {
 	async create(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
@@ -69,8 +70,14 @@ class PlaceController {
 		}
 	}
 	async delete(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+		const { id } = req.params
 		try {
-			res.status(200).json({ message: 'it works delete' })
+			const deleted = await placeServices.deleteOne({ _id: id })
+			if (deleted === null) {
+				const error = createError('Already deleted', 400)
+				throwError(error)
+			}
+			res.status(204).json()
 		} catch (error: any) {
 			error.place = 'Delete place'
 			next(error)
