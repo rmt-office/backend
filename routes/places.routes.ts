@@ -1,12 +1,14 @@
-import { Router } from "express";
-import placeController from "../controllers/place.controller";
-import { isAuthenticated } from "../middlewares/isAuthenticated";
-import { isAdmin } from "../middlewares/isAdmin";
+import { Router } from 'express'
+import placeController from '../controllers/place.controller'
+import { isAuthenticated } from '../middlewares/isAuthenticated'
+import { isAdmin } from '../middlewares/isAdmin'
+import { validate } from '../middlewares/validate'
+import { createPlaceSchema } from '../validationSchema/Place.schema'
 
 const router = Router()
 
 router.use(isAuthenticated)
-router.post('/', placeController.create)
+router.post('/', validate(createPlaceSchema), placeController.create)
 router.get('/', placeController.getAll)
 router.get('/filter', placeController.getByFilters)
 router.get('/:id', placeController.getOne)
