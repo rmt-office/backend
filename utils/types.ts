@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken'
 export type Overwrite<T1, T2> = { [Prop in Exclude<keyof T1, keyof T2>]: T1[Prop] } & T2
 export interface ErrorProps {
 	message: string
-	place?: string
 	status: number
+	place?: string
 	issues?: {
 		message: any
 		expected: string
