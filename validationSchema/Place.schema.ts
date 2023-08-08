@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import z from 'zod'
 
 export const createPlaceSchema = z.object({
@@ -38,3 +39,12 @@ export const createPlaceSchema = z.object({
 })
 
 export type PlaceSchema = z.TypeOf<typeof createPlaceSchema>
+
+export const findOnePlaceSchema = z.object({
+	params: z.object({
+		id: z.string().refine(data => mongoose.isValidObjectId(data), {
+			message: 'Invalid Id',
+			path: ['Find One'],
+		}),
+	}),
+})

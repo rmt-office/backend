@@ -25,10 +25,6 @@ class PlaceController {
 		}
 
 		try {
-			checkRequired(newPlace.name, 'Name')
-			checkRequired(newPlace.category, 'Category')
-			checkRequired(newPlace.contactInfo, 'Contact Info')
-
 			const placeCreated = await placeServices.createPlace(newPlace)
 
 			res.status(200).json({ message: 'it works create', placeCreated })
@@ -50,7 +46,7 @@ class PlaceController {
 
 	async getByFilters(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		const { tags } = req.body
-		const tagsRenamed: {[key: string]: boolean} = {}
+		const tagsRenamed: { [key: string]: boolean } = {}
 		for (let tag in tags) {
 			const newName = `tags.${tag}`
 			tagsRenamed[newName] = tags[tag]
@@ -58,7 +54,7 @@ class PlaceController {
 		delete req.body.tags
 
 		try {
-			const filtered = await placeServices.findByFilters({...req.body, ...tagsRenamed})
+			const filtered = await placeServices.findByFilters({ ...req.body, ...tagsRenamed })
 			res.status(200).json(filtered)
 		} catch (error: any) {
 			error.place = 'Get place by filtering'
@@ -69,7 +65,7 @@ class PlaceController {
 	async getOne(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		const { id } = req.params
 		try {
-			const place = await placeServices.findOne({ _id: id})
+			const place = await placeServices.findOne({ _id: id })
 			res.status(200).json(place)
 		} catch (error: any) {
 			error.place = 'Get one place'
