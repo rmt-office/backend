@@ -3,7 +3,6 @@ import 'dotenv/config'
 import morgan from 'morgan'
 
 import { connectDB } from './mongoose/mongooseConnection'
-import { errorHandling } from './routes/errorHandling'
 
 import routes from './routes'
 
