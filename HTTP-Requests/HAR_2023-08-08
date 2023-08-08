@@ -1,0 +1,1232 @@
+{
+	"log": {
+		"version": "1.2",
+		"creator": {
+			"name": "Insomnia REST Client",
+			"version": "insomnia.desktop.app:v2023.4.0"
+		},
+		"entries": [
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 14.047,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost:5000/places/",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "",
+						"text": "",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "3462"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"d86-Df9ypR+fNy/yljE3cXeeKc9mzbk\""
+						},
+						{
+							"name": "Date",
+							"value": "Thu, 03 Aug 2023 15:12:53 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 3462,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "[{\"_id\":\"64cba8c777d25b9284a98049\",\"name\":\"Insominia Test\",\"category\":\"Café\",\"contactInfo\":{\"website\":\"insomina site\",\"_id\":\"64cba8c777d25b9284a9804a\"},\"photos\":[],\"createdAt\":\"2023-08-03T13:16:55.989Z\",\"updatedAt\":\"2023-08-03T13:16:55.989Z\",\"__v\":0},{\"_id\":\"64cba8e177d25b9284a9804c\",\"name\":\"Insominia Test\",\"category\":\"Café\",\"contactInfo\":{\"website\":\"insomina site\",\"_id\":\"64cba8e177d25b9284a9804d\"},\"photos\":[],\"createdAt\":\"2023-08-03T13:17:21.176Z\",\"updatedAt\":\"2023-08-03T13:17:21.176Z\",\"__v\":0},{\"_id\":\"64cbb1f76e6e0999be21eeb9\",\"name\":\"Insominia Test\",\"category\":\"Café\",\"contactInfo\":{\"website\":\"insomina site\",\"_id\":\"64cbb1f76e6e0999be21eeba\"},\"creator\":\"64ca6d0675821a92a43b08f2\",\"photos\":[],\"createdAt\":\"2023-08-03T13:56:07.440Z\",\"updatedAt\":\"2023-08-03T13:56:07.440Z\",\"__v\":0},{\"_id\":\"64cbb2276e6e0999be21eebc\",\"name\":\"Insominia Test\",\"category\":\"Café\",\"contactInfo\":{\"website\":\"insomina site\",\"telephone\":\"249871904857190\",\"linkedIn\":\"linkedIn Test\",\"facebook\":\"somefacebook link\",\"_id\":\"64cbb2276e6e0999be21eebd\"},\"creator\":\"64ca6d0675821a92a43b08f2\",\"photos\":[],\"createdAt\":\"2023-08-03T13:56:55.900Z\",\"updatedAt\":\"2023-08-03T13:56:55.900Z\",\"__v\":0},{\"_id\":\"64cbb2c26e6e0999be21eebf\",\"name\":\"Insominia Test\",\"category\":\"Café\",\"description\":\"Cozy café with a delicious coffee\",\"contactInfo\":{\"website\":\"insomina site\",\"telephone\":\"249871904857190\",\"linkedIn\":\"linkedIn Test\",\"facebook\":\"somefacebook link\",\"_id\":\"64cbb2c26e6e0999be21eec0\"},\"price\":4,\"meetingRoom\":2,\"bathrooms\":0,\"wifiSpeed\":\"Medium\",\"isPrivate\":false,\"creator\":\"64ca6d0675821a92a43b08f2\",\"photos\":[\"\"],\"createdAt\":\"2023-08-03T13:59:30.267Z\",\"updatedAt\":\"2023-08-03T13:59:30.267Z\",\"__v\":0},{\"tags\":{\"hasFood\":false,\"hasDrink\":false,\"hasCafeteria\":true,\"isAccessible\":true,\"isVegan\":true,\"isVegetarian\":true},\"_id\":\"64cbb30c6e6e0999be21eec2\",\"name\":\"Insominia Test\",\"category\":\"Café\",\"description\":\"Cozy café with a delicious coffee\",\"contactInfo\":{\"website\":\"insomina site\",\"telephone\":\"249871904857190\",\"linkedIn\":\"linkedIn Test\",\"facebook\":\"somefacebook link\",\"_id\":\"64cbb30c6e6e0999be21eec3\"},\"price\":4,\"meetingRoom\":2,\"bathrooms\":0,\"wifiSpeed\":\"Medium\",\"isPrivate\":false,\"creator\":\"64ca6d0675821a92a43b08f2\",\"photos\":[\"\"],\"createdAt\":\"2023-08-03T14:00:44.582Z\",\"updatedAt\":\"2023-08-03T14:00:44.582Z\",\"__v\":0},{\"tags\":{\"hasFood\":false,\"hasDrink\":false,\"hasCafeteria\":true,\"isAccessible\":true,\"isVegan\":true,\"isVegetarian\":true},\"_id\":\"64cbb3506e6e0999be21eec5\",\"name\":\"Insominia Test\",\"category\":\"Café\",\"description\":\"Cozy café with a delicious coffee\",\"contactInfo\":{\"website\":\"insomina site\",\"telephone\":\"249871904857190\",\"linkedIn\":\"linkedIn Test\",\"facebook\":\"somefacebook link\",\"_id\":\"64cbb3506e6e0999be21eec6\"},\"price\":4,\"meetingRoom\":2,\"bathrooms\":0,\"wifiSpeed\":\"Medium\",\"isPrivate\":false,\"creator\":\"64ca6d0675821a92a43b08f2\",\"photos\":[],\"createdAt\":\"2023-08-03T14:01:52.760Z\",\"updatedAt\":\"2023-08-03T14:01:52.760Z\",\"__v\":0},{\"tags\":{\"hasFood\":false,\"hasDrink\":false,\"hasCafeteria\":true,\"isAccessible\":true,\"isVegan\":false,\"isVegetarian\":true},\"_id\":\"64cbb3c76e6e0999be21eec8\",\"name\":\"second edit\",\"category\":\"Coworking\",\"description\":\"Cozy café with a delicious coffee\",\"contactInfo\":{\"website\":\"O\",\"linkedIn\":\"JJ\",\"_id\":\"64cbc38279a96178158d5a0f\"},\"price\":1,\"meetingRoom\":0,\"bathrooms\":2,\"wifiSpeed\":\"Fast\",\"isPrivate\":false,\"creator\":\"64ca6d0675821a92a43b08f2\",\"photos\":[],\"createdAt\":\"2023-08-03T14:03:51.289Z\",\"updatedAt\":\"2023-08-03T15:10:58.286Z\",\"__v\":0}]"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 14.047,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Get All"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 8.363000000000001,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost:5000/places/64cba8c777d25b9284a9804",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "",
+						"text": "",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 400,
+					"statusText": "Bad Request",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "101"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"65-r2m95FW7YQyqEblcZzA7WZs7E2c\""
+						},
+						{
+							"name": "Date",
+							"value": "Tue, 08 Aug 2023 15:14:45 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 101,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"errors\":[{\"message\":\"Invalid Id\",\"path\":[\"params\",\"id\",\"Find One\"]}],\"place\":\"Validate Middleware\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 8.363000000000001,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Get One"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 5.772,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost:5000/places/filter",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"name\": \"Insominia Test\",\n\t\"tags\": {\n\t\t\"isVegan\": true\n\t}\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "626"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"272-lJCA2tc1/ahjd97kDHxtN2azUHc\""
+						},
+						{
+							"name": "Date",
+							"value": "Thu, 03 Aug 2023 15:24:08 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 626,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "[{\"tags\":{\"hasFood\":false,\"hasDrink\":false,\"hasCafeteria\":true,\"isAccessible\":true,\"isVegan\":true,\"isVegetarian\":true},\"_id\":\"64cbb30c6e6e0999be21eec2\",\"name\":\"Insominia Test\",\"category\":\"Café\",\"description\":\"Cozy café with a delicious coffee\",\"contactInfo\":{\"website\":\"insomina site\",\"telephone\":\"249871904857190\",\"linkedIn\":\"linkedIn Test\",\"facebook\":\"somefacebook link\",\"_id\":\"64cbb30c6e6e0999be21eec3\"},\"price\":4,\"meetingRoom\":2,\"bathrooms\":0,\"wifiSpeed\":\"Medium\",\"isPrivate\":false,\"creator\":\"64ca6d0675821a92a43b08f2\",\"photos\":[\"\"],\"createdAt\":\"2023-08-03T14:00:44.582Z\",\"updatedAt\":\"2023-08-03T14:00:44.582Z\",\"__v\":0}]"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 5.772,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Get Filtered"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 3.8960000000000004,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost:5000/places/",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"name\": \"Insomnia Test\",\n\t\"category\": \"Café\",\n\t\"contactInfo\": {\n\t\t\"website\": \"http://instagram.com/mantovani\"\n\t},\n\t\"price\": 4,\n\t\"meetingRoom\": 2,\n\t\"bathrooms\": 0,\n\t\"description\": \"Cozy café with a delicious coffee\",\n\t\"wifiSpeed\": \"Medium\",\n\t\"isPrivate\": false,\n\t\"tags\": {\n\t\t\"hasFood\": true,\n\t\t\"hasDrink\": false,\n\t\t\"hasCafeteria\": true,\n\t\t\"isAccessible\": true,\n\t\t\"isVegan\": true,\n\t\t\"isVegetarian\": true\n\t},\n\t\"photos\": [\"https://res.cloudinary.com/dx2ymjepk/image/upload/v1690986732/remote-office/rp3wjqkx0t0w7rqdviz1.jpg\", \"https://res.cloudinary.com/dx2ymjepk/image/upload/v1680898609/projects-gallery/z9ysqa4o8s1naq6b4twn.png\"]\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 400,
+					"statusText": "Bad Request",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "190"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"be-7WGctTZFoR+1pSfjYU1GyR963So\""
+						},
+						{
+							"name": "Date",
+							"value": "Tue, 08 Aug 2023 15:06:49 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 190,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"errors\":[{\"message\":\"Required\",\"expected\":\"'Café' | 'Airport' | 'Hotel Lobby' | 'Library' | 'Coworking'\",\"received\":\"undefined\",\"path\":[\"body\",\"category\"]}],\"place\":\"Validate Middleware\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 3.8960000000000004,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Create a place"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 24.212,
+				"request": {
+					"method": "PUT",
+					"url": "http://localhost:5000/places/64cbb3506e6e0999be21eec5",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"name\": \"make only one name insomnia test\",\n\t\"category\": \"Coworking\",\n\t\"contactInfo\": {\n\t\t\"website\": \"O\",\n\t\t\"linkedIn\": \"JJ\"\n\t},\n\t\"price\": 1,\n\t\"meetingRoom\": 0,\n\t\"bathrooms\": 2,\n\t\"description\": \"Cozy café with a delicious coffee\",\n\t\"wifiSpeed\": \"Fast\",\n\t\"isPrivate\": false,\n\t\"tags\": {\n\t\t\"hasFood\": false,\n\t\t\"hasDrink\": false,\n\t\t\"hasCafeteria\": true,\n\t\t\"isAccessible\": true,\n\t\t\"isVegan\": false,\n\t\t\"isVegetarian\": true\n\t},\n\t\"photos\": []\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "559"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"22f-Z0vuPi//QFaVI2bEp67xxKm/Juc\""
+						},
+						{
+							"name": "Date",
+							"value": "Thu, 03 Aug 2023 15:24:03 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 559,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"tags\":{\"hasFood\":false,\"hasDrink\":false,\"hasCafeteria\":true,\"isAccessible\":true,\"isVegan\":false,\"isVegetarian\":true},\"_id\":\"64cbb3506e6e0999be21eec5\",\"name\":\"make only one name insomnia test\",\"category\":\"Coworking\",\"description\":\"Cozy café with a delicious coffee\",\"contactInfo\":{\"website\":\"O\",\"linkedIn\":\"JJ\",\"_id\":\"64cbc693e563ec0a54dd51b4\"},\"price\":1,\"meetingRoom\":0,\"bathrooms\":2,\"wifiSpeed\":\"Fast\",\"isPrivate\":false,\"creator\":\"64ca6d0675821a92a43b08f2\",\"photos\":[],\"createdAt\":\"2023-08-03T14:01:52.760Z\",\"updatedAt\":\"2023-08-03T15:24:03.080Z\",\"__v\":0}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 24.212,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Update One"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 14.652999999999999,
+				"request": {
+					"method": "DELETE",
+					"url": "http://localhost:5000/places/64cbb86f1296e25bd00dfd79",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "",
+						"text": "",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 400,
+					"statusText": "Bad Request",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "52"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"34-qsD35oZZ4P/7km5zgvdmAhZywuE\""
+						},
+						{
+							"name": "Date",
+							"value": "Thu, 03 Aug 2023 15:04:44 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 52,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"message\":\"Already deleted\",\"place\":\"Delete place\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 14.652999999999999,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Delete"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 1217.951,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost:5000/api/picture",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "multipart/form-data"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "multipart/form-data",
+						"text": "",
+						"params": [
+							{
+								"name": "image",
+								"fileName": "C:\\Users\\Felipe\\Desktop\\Professional\\Foto LinkedIn - Copie.jpeg"
+							}
+						]
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "102"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"66-EA7ojAP3H1EDdvD4DPs6OW9BGHc\""
+						},
+						{
+							"name": "Date",
+							"value": "Wed, 02 Aug 2023 14:32:13 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 102,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "\"https://res.cloudinary.com/dx2ymjepk/image/upload/v1690986732/remote-office/rp3wjqkx0t0w7rqdviz1.jpg\""
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 1217.951,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Picture Upload"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 3197.937,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost:5000/auth/signup",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"email\": \"felipe.mantovani@outlook.com\",\n\t\"password\": \"Aa123456!\",\n\t\"confirmPassword\": \"Aa123456!\"\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 201,
+					"statusText": "Created",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "261"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"105-s8oiUJ4op2Hkudd8PTGwmTAV+Dw\""
+						},
+						{
+							"name": "Date",
+							"value": "Thu, 03 Aug 2023 14:15:40 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 261,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"email\":\"felipe.mantovani@outlook.com\",\"username\":\"felipe.mantovani\",\"canUpdateOn\":\"first\",\"isVerified\":false,\"isAdmin\":false,\"favorites\":[],\"_id\":\"64cbb6896e6e0999be21eecd\",\"createdAt\":\"2023-08-03T14:15:37.775Z\",\"updatedAt\":\"2023-08-03T14:15:37.775Z\",\"__v\":0}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 3197.937,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Sign Up"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 303.358,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost:5000/auth/login",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"email\": \"felipe.mantovani@outlook.com\",\n\t\"password\": \"Aa123456!\"\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "253"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"fd-8taSsRaJnTggTfA10ppvnHEpsT4\""
+						},
+						{
+							"name": "Date",
+							"value": "Tue, 08 Aug 2023 15:14:45 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 253,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 303.358,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Login"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 359.933,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost:5000/auth/login",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"email\": \"felipe2@gmail.com\",\n\t\"password\": \"Aa123456@\"\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "227"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"e3-qwSXvDBQMDtptykc2EKbpxtaatk\""
+						},
+						{
+							"name": "Date",
+							"value": "Thu, 03 Aug 2023 14:56:35 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 227,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZTJAZ21haWwuY29tIiwiX2lkIjoiNjRjOTA0OGM1ZjhlNTA2ZDNmZmZhYWUzIiwidXNlcm5hbWUiOiJmZWxpcGU3IiwiaWF0IjoxNjkxMDc0NTk1fQ.8XpKpG0L7-zH4Da5MRxvWs3gh5e9tklrMWsMdknnE18\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 359.933,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Login - Non Admin (Unverified)"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 206.863,
+				"request": {
+					"method": "PUT",
+					"url": "http://localhost:5000/user/",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"currentPassword\": \"Aa123456@\",\n\t\"email\": \"felipe.mantovani@outlook.com\",\n\t\"username\": \"hermano\"\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "231"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"e7-f25Cr90IXoQHqs5sXJIp2KZmLO8\""
+						},
+						{
+							"name": "Date",
+							"value": "Wed, 02 Aug 2023 14:51:29 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 231,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNhNmQwNjc1ODIxYTkyYTQzYjA4ZjIiLCJ1c2VybmFtZSI6Imhlcm1hbm8iLCJpYXQiOjE2OTA5ODc4ODl9.3Bzvd8EQvZaz1Wa3kQ6w4uyPLOpIX3dHokSnIjd32MA\""
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 206.863,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Update"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 7.253,
+				"request": {
+					"method": "PUT",
+					"url": "http://localhost:5000/user/photo",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"profilePicture\": \"https://res.cloudinary.com/dx2ymjepk/image/upload/v1690986732/remote-office/rp3wjqkx0t0w7rqdviz1.jpg\"\t\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "376"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"178-v0BiQ3V9PMgSLgnXzcOj0UEJpvw\""
+						},
+						{
+							"name": "Date",
+							"value": "Wed, 02 Aug 2023 14:51:48 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 376,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"_id\":\"64ca6d0675821a92a43b08f2\",\"email\":\"felipe.mantovani@outlook.com\",\"username\":\"hermano\",\"canUpdateOn\":\"2023-11-02\",\"isVerified\":true,\"isAdmin\":false,\"favorites\":[],\"createdAt\":\"2023-08-02T14:49:42.891Z\",\"updatedAt\":\"2023-08-02T14:51:48.617Z\",\"__v\":0,\"profilePicture\":\"https://res.cloudinary.com/dx2ymjepk/image/upload/v1690986732/remote-office/rp3wjqkx0t0w7rqdviz1.jpg\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 7.253,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Update Photo"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 5.287,
+				"request": {
+					"method": "DELETE",
+					"url": "http://localhost:5000/user/",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "",
+						"text": "",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 204,
+					"statusText": "No Content",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Date",
+							"value": "Wed, 02 Aug 2023 14:54:29 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 0,
+						"mimeType": "",
+						"text": ""
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 5.287,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Delete"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 4.221,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost:5000/auth/verify",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZS5tYW50b3ZhbmlAb3V0bG9vay5jb20iLCJfaWQiOiI2NGNiYjY4OTZlNmUwOTk5YmUyMWVlY2QiLCJ1c2VybmFtZSI6ImZlbGlwZS5tYW50b3ZhbmkiLCJpYXQiOjE2OTE1MDc2ODV9.a2GAkCIjbMmTLwxIZ5nxPdCdOK26p-i0_vau4j0zkI0"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"email\": \"hahaha3@gmail.com\",\n\t\"password\": \"1234056\"\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "120"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"78-C3eTICpEf48eixhAsHfdPcK3EpY\""
+						},
+						{
+							"name": "Date",
+							"value": "Thu, 03 Aug 2023 14:23:37 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 120,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"email\":\"felipe.mantovani@outlook.com\",\"_id\":\"64cbb6896e6e0999be21eecd\",\"username\":\"felipe.mantovani\",\"iat\":1691072617}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 4.221,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Verify"
+			},
+			{
+				"startedDateTime": "2023-08-08T15:26:26.098Z",
+				"time": 25.122,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost:5000/auth/verify",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"name": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhaGFoYTNAZ21haWwuY29tIiwiX2lkIjoiNjRjMjZhNzIxYzUwMDUyMzM2MjhlNWY5IiwidXNlcm5hbWUiOiJoYWhhaGEzIiwiaWF0IjoxNjkwNDY1MDAzfQ.DOpGXFpkpRgqjAgnsGE01ZD4qm5wL1wp1c3OO"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"email\": \"hahaha3@gmail.com\",\n\t\"password\": \"1234056\"\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 401,
+					"statusText": "Unauthorized",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "56"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"38-quwLNHRFladc1MVxaiw+zDJabPc\""
+						},
+						{
+							"name": "Date",
+							"value": "Thu, 27 Jul 2023 14:07:34 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 56,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"message\":\"invalid signature\",\"place\":\"JWT middleware\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 25.122,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Verify - Fail"
+			}
+		]
+	}
+}
