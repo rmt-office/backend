@@ -1,4 +1,4 @@
-import { NewPlace, Place, PlaceHydrate, PlaceModel } from '../models/Place.model'
+import { NewPlace, Place, PlaceModel } from '../models/Place.model'
 import {
 	UpdateProps,
 	create,
@@ -8,7 +8,7 @@ import {
 	findOneAndUpdate,
 } from '../database/mongooseServices'
 
-type UpdateOptions = UpdateProps<PlaceHydrate>
+type UpdateOptions = UpdateProps<Place>
 type FilterOptions = UpdateOptions['filter']
 type QueryOptions = UpdateOptions['options']
 

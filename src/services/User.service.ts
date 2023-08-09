@@ -1,4 +1,4 @@
-import { UserModel, NewUser, UserInfer } from '../models/User.model'
+import { UserModel, NewUser, User } from '../models/User.model'
 import {
 	UpdateProps,
 	create,
@@ -8,7 +8,7 @@ import {
 	findOneAndUpdate,
 } from '../database/mongooseServices'
 
-type UpdateOptions = UpdateProps<UserInfer>
+type UpdateOptions = UpdateProps<User>
 type FilterOptions = UpdateOptions['filter']
 type QueryOptions = UpdateOptions['options']
 

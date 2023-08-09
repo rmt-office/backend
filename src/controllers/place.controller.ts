@@ -1,7 +1,6 @@
 import { RouteProps } from '../utils/types'
 import { NewPlace } from '../models/Place.model'
 import placeServices from '../services/Place.service'
-import { checkRequired } from '../utils/checkInput'
 import { createError, throwError } from '../utils/throwError'
 
 class PlaceController {
