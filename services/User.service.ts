@@ -1,19 +1,20 @@
 import { UserModel, NewUser, UserInfer }  from "../models/User.model";
-import { UpdateProps, create, deleteOne, findAll, findOne, findOneAndUpdate } from "../mongoose/mongooseServices";
+import { UpdateProps, create, deleteOne, find , findOne, findOneAndUpdate } from "../mongoose/mongooseServices";
 
 type UpdateOptions = UpdateProps<UserInfer>
 type FilterOptions = UpdateOptions['filter']
+type QueryOptions = UpdateOptions['options']
 
  class UserService {
   async createUser(user: NewUser) {
     return create(UserModel, user)
   }
   
-  async getUsers() {
-    return findAll(UserModel)
+  async getAllUsers(options?: QueryOptions) {
+    return find(UserModel, {}, options)
   }
 
-  async getOneUser(filter: FilterOptions, options?: UpdateOptions['options']) {
+  async getOneUser(filter: FilterOptions, options?: QueryOptions) {
     return findOne(UserModel, filter, options)
   }
 
