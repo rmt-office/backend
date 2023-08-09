@@ -12,9 +12,13 @@ export const createPlaceSchema = z.object({
 			instagram: z.string().optional(),
 			telephone: z.string().optional(),
 		}),
-		price: z.number().min(1).max(5).optional(),
-		meetingRoom: z.number().min(0).optional(),
-		bathrooms: z.number().min(0).optional(),
+		price: z
+			.number()
+			.min(1, { message: 'Price must be between 1 and 5' })
+			.max(5, { message: 'Price must be between 1 and 5' })
+			.optional(),
+		meetingRoom: z.number().min(0, { message: 'Meeting Rooms must be at least 0' }).optional(),
+		bathrooms: z.number().min(0, { message: 'Bathrooms must be at least 0' }).optional(),
 		description: z.string().optional(),
 		wifiSpeed: z.enum(['Fast', 'Medium', 'Slow']).optional(),
 		tags: z
@@ -38,13 +42,17 @@ export const createPlaceSchema = z.object({
 	}),
 })
 
+export const updatePlaceSchema = createPlaceSchema.deepPartial()
+
 export type PlaceSchema = z.TypeOf<typeof createPlaceSchema>
 
-export const findOnePlaceSchema = z.object({
-	params: z.object({
-		id: z.string().refine(data => mongoose.isValidObjectId(data), {
-			message: 'Invalid Id',
-			path: ['Find One'],
+export const testIdPlaceSchema = (test: string) => {
+	return z.object({
+		params: z.object({
+			id: z.string().refine(data => mongoose.isValidObjectId(data), {
+				message: 'Invalid Id',
+				path: [test],
+			}),
 		}),
-	}),
-})
+	})
+}
