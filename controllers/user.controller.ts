@@ -1,5 +1,13 @@
 import userServices from '../services/User.service'
-import { checkEmailInput, checkEmailRegex, checkPasswordInput, checkRequiredInput, checkUsername, checkUsernameForUpdate, validateLogin } from '../utils/checkUserInfo'
+import {
+	checkEmailInput,
+	checkEmailRegex,
+	checkPasswordInput,
+	checkRequiredInput,
+	checkUsername,
+	checkUsernameForUpdate,
+	validateLogin,
+} from '../utils/checkUserInfo'
 import { createError, throwError } from '../utils/throwError'
 import { RouteProps } from '../utils/types'
 import { hashPassword, validatePassword } from '../utils/passwordHandlers'
@@ -8,7 +16,10 @@ import { sendMail } from '../utils/nodemailer'
 import { NewUser } from '../models/User.model'
 
 type InputType = {
-	email: string, password: string, confirmPassword: string, username: string
+	email: string
+	password: string
+	confirmPassword: string
+	username: string
 }
 class UserController {
 	async signup(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
@@ -53,7 +64,7 @@ class UserController {
 
 				const token = createToken(userObject)
 
-				res.status(200).json({token})
+				res.status(200).json({ token })
 			}
 		} catch (error: any) {
 			error.place = 'Login'
@@ -72,7 +83,11 @@ class UserController {
 		}
 	}
 
-	async emailVerification(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
+	async emailVerification(
+		req: RouteProps['req'],
+		res: RouteProps['res'],
+		next: RouteProps['next']
+	) {
 		const { id } = req.params
 		try {
 			const updateVerify = {
@@ -81,15 +96,16 @@ class UserController {
 					_id: id,
 				},
 				infoUpdate: {
-					isVerified: true
+					isVerified: true,
 				},
 				options: {
-					new: true
-				}
+					new: true,
+				},
 			}
 			await userServices.findOneAndUpdate(updateVerify)
 			// TODO: change to an HTML response with a successfull response
 			res.status(200).json({ message: 'Your email was successfully verified' })
+			// TODO: send welcome email
 		} catch (error: any) {
 			error.place = 'Email verification'
 			next(error)
@@ -117,7 +133,7 @@ class UserController {
 					updatedUser = await userServices.findOneAndUpdate({
 						filter: { _id: req.payload!._id },
 						infoUpdate: { password: newPassword },
-						options: { new: true, runValidators: true }
+						options: { new: true, runValidators: true },
 					})
 				}
 
@@ -137,7 +153,7 @@ class UserController {
 					updatedUser = await userServices.findOneAndUpdate({
 						filter: { _id: req.payload!._id },
 						infoUpdate: { ...newInfo, canUpdateOn: newUpdatableDate },
-						options: { new: true, runValidators: true }
+						options: { new: true, runValidators: true },
 					})
 				}
 
@@ -146,13 +162,12 @@ class UserController {
 
 				const token = createToken(withoutPassword)
 
-				res.status(200).json({token})
+				res.status(200).json({ token })
 			}
 		} catch (error: any) {
 			error.place = 'Update user'
 			next(error)
 		}
-
 	}
 
 	async updatePhoto(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
@@ -164,11 +179,11 @@ class UserController {
 				const error = createError('You must send a picture url', 400)
 				throwError(error)
 			}
-			
+
 			const updatedUser = await userServices.findOneAndUpdate({
-				filter: { _id: _id }, 
-				infoUpdate: { profilePicture }, 
-				options: { new: true, fields: '-password' }
+				filter: { _id: _id },
+				infoUpdate: { profilePicture },
+				options: { new: true, fields: '-password' },
 			})
 
 			res.status(200).json(updatedUser)
@@ -178,7 +193,11 @@ class UserController {
 		}
 	}
 
-	async updateFavorites(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+	async updateFavorites(
+		req: RouteProps['payload'],
+		res: RouteProps['res'],
+		next: RouteProps['next']
+	) {
 		// TODO: Implement update favorites after places are created
 	}
 
