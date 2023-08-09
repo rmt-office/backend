@@ -6,7 +6,7 @@ import {
 	find,
 	findOne,
 	findOneAndUpdate,
-} from '../mongoose/mongooseServices'
+} from '../database/mongooseServices'
 
 type UpdateOptions = UpdateProps<PlaceHydrate>
 type FilterOptions = UpdateOptions['filter']

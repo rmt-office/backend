@@ -2,9 +2,9 @@ import express from 'express'
 import 'dotenv/config'
 import morgan from 'morgan'
 
-import { connectDB } from './mongoose/mongooseConnection'
+import { connectDB } from './src/database/databaseConnection'
 
-import routes from './routes'
+import routes from './src/routes'
 
 const app = express()
 
