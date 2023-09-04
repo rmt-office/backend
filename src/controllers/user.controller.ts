@@ -1,10 +1,7 @@
 import userServices from '../services/User.service'
 import {
 	checkEmailInput,
-	checkEmailRegex,
 	checkPasswordInput,
-	checkRequiredInput,
-	checkUsername,
 	checkUsernameForUpdate,
 	validateLogin,
 } from '../utils/checkUserInfo'
@@ -23,12 +20,9 @@ type InputType = {
 }
 class UserController {
 	async signup(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
-		const { email, password, confirmPassword }: InputType = req.body
+		const { email, password }: InputType = req.body
 		let { username }: InputType = req.body
 		try {
-			checkRequiredInput(email, password, confirmPassword)
-			username = checkUsername(username, email)
-			// TODO: Check the user for unique username?
 			const userFromDB = await userServices.getOneUser({ $or: [{ email }, { username }] })
 			if (userFromDB) {
 				const error = createError('User already exists', 400)

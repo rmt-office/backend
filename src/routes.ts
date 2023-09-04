@@ -2,7 +2,8 @@ import { Router } from 'express'
 import authRoutes from './routes/auth.routes'
 import userRoutes from './routes/user.routes'
 import placesRoutes from './routes/places.routes'
-import { errorHandling } from './routes/errorHandling'
+import { errorHandling } from './routes/errorHandling.routes'
+import notFound from './routes/notFound.routes'
 import { RouteProps } from './utils/types'
 import pictureUpload from './routes/pictureUpload.routes'
 
@@ -22,5 +23,7 @@ router.use(
 		next: RouteProps['next']
 	): RouteProps['res'] => errorHandling(error, res)
 )
+
+router.use(notFound)
 
 export default router
