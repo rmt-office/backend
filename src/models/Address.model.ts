@@ -3,7 +3,6 @@ import { Timestamps } from '../utils/types'
 
 const addressSchema = new Schema(
 	{
-        address:{
             country:{
               type: String,
               required: true
@@ -16,10 +15,12 @@ const addressSchema = new Schema(
               type: String,
               required: true
             },
-        zipCode: { String? }
+        zipCode: { type: String || Number }
         },
+
+        {
 		timestamps: true,
-	}
+        }
 )
 
 const AddressModel = model('Address', addressSchema)
