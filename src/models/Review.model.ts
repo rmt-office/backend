@@ -25,12 +25,14 @@ const reviewSchema = new Schema(
            type: String,
            enum: ["Fast", "Medium", "Slow"]
         },
-        like: {
+        like: [{
+            type: Schema.Types.ObjectId,
             ref: "User"
-        },
-        dislike: {
+    }],
+        dislike: [{
+            type: Schema.Types.ObjectId,
             ref: "User"
-        },
+        }],
         reply: {
             text:{
                 type: String,

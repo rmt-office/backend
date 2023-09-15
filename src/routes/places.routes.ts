@@ -11,9 +11,10 @@ import {
 
 const router = Router()
 
+router.get('/', placeController.getAll)
+
 router.use(isAuthenticated)
 router.post('/', validate(createPlaceSchema), placeController.create)
-router.get('/', placeController.getAll)
 router.get('/filter', placeController.getByFilters)
 router.get('/:id', validate(testIdPlaceSchema('Find One')), placeController.getOne)
 router.put(
