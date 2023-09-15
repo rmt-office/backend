@@ -1,7 +1,6 @@
 import { RouteProps } from '../utils/types'
 import { NewPlace } from '../models/Place.model'
 import placeServices from '../services/Place.service'
-import { checkRequired } from '../utils/checkInput'
 import { createError, throwError } from '../utils/throwError'
 
 class PlaceController {
@@ -27,7 +26,7 @@ class PlaceController {
 		try {
 			const placeCreated = await placeServices.createPlace(newPlace)
 
-			res.status(200).json({ message: 'it works create', placeCreated })
+			res.status(200).json({ placeCreated })
 		} catch (error: any) {
 			error.place = 'Create a new place'
 			next(error)
