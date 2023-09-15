@@ -15,7 +15,7 @@ const addressSchema = new Schema(
               type: String,
               required: true
             },
-        zipCode: { type: String || Number }
+        zipCode: { type: String }
         },
 
         {
@@ -26,7 +26,6 @@ const addressSchema = new Schema(
 const AddressModel = model('Address', addressSchema)
 type Address = InferSchemaType<typeof addressSchema>
 type AddressHydrate = HydratedDocument<typeof addressSchema>
-type AddressSub = Omit<Address, 'creator'>
-type NewAddress = Omit<AddressSub, keyof Timestamps> & { creator: string }
+type NewAddress = Omit<Address, keyof Timestamps> & { creator: string }
 
 export { AddressModel, Address, AddressHydrate, NewAddress }
