@@ -26,7 +26,7 @@ class PlaceController {
 		try {
 			const placeCreated = await placeServices.createPlace(newPlace)
 
-			res.status(200).json({ message: 'it works create', placeCreated })
+			res.status(200).json({ placeCreated })
 		} catch (error: any) {
 			error.place = 'Create a new place'
 			next(error)
