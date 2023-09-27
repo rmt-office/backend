@@ -26,6 +26,6 @@ const addressSchema = new Schema(
 const AddressModel = model('Address', addressSchema)
 type Address = InferSchemaType<typeof addressSchema>
 type AddressHydrate = HydratedDocument<typeof addressSchema>
-type NewAddress = Omit<Address, keyof Timestamps> & { creator: string }
+type NewAddress = Omit<Address, keyof Timestamps> 
 
 export { AddressModel, Address, AddressHydrate, NewAddress }
