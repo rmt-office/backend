@@ -9,13 +9,13 @@ class AddressController {
 			country: req.body.country,
 			city: req.body.city,
 			street: req.body.street,
-			zipCode: req.body.zipCode
+			zipCode: req.body.zipCode,
 		}
 
 		try {
 			const addressCreated = await addressServices.createAddress(newAddress)
 
-			res.status(200).json({ message: 'address created', addressCreated })
+			res.status(200).json(addressCreated)
 		} catch (error: any) {
 			error.place = 'Create a new address'
 			next(error)
@@ -32,7 +32,7 @@ class AddressController {
 		}
 	}
 
-    //TODO - check usability
+	//TODO - check usability
 	async getByFilters(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		try {
 			const filtered = await addressServices.findByFilters({ ...req.body })
@@ -56,7 +56,7 @@ class AddressController {
 
 	async update(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		const { id } = req.params
-		const addressToUpdate: Omit<NewAddress, 'creator'> = {
+		const addressToUpdate: NewAddress = {
 			country: req.body.country,
 			city: req.body.city,
 			street: req.body.street,
