@@ -9,7 +9,6 @@ export const validate =
 				body: req.body,
 				params: req.params,
 				query: req.query,
-				payload: req.payload,
 			})
 			next()
 		} catch (error: any) {
