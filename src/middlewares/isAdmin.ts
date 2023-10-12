@@ -1,3 +1,5 @@
+//TODO: Review functionality of this middleware
+
 import UserService from '../services/User.service'
 import { createError, throwError } from '../utils/throwError'
 import { RouteProps } from '../utils/types'

@@ -3,16 +3,17 @@ import z from 'zod'
 
 export const createReviewSchema = z.object({
 	body: z.object({
-		score: z.number(),
-		comment: z.string(),
-		tags: z.string(),
-		zipCode: z.string(),
-        price: z.number(),
-        wifi: z.string(),
-        // like: z.Schema.Types.ObjectId,
-        // dislike: z.Schema.Types.ObjectId,
-        // https://github.com/colinhacks/zod/issues/318
-        reply: z.string(),
+		score: z.number().min(1).max(5),
+		comment: z.string().optional(),
+		tags: z.array(z.enum([
+			'quiet place',
+			'good internet connection',
+			'good location',
+			'easy to find a place',
+			'many plugs',
+		])).optional(),
+        price: z.number().min(1).max(5).optional(),
+        wifi: z.enum(['Fast', 'Medium', 'Slow']).optional(),
 	}),
 })
 

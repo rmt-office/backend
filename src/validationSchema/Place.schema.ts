@@ -34,7 +34,7 @@ export const createPlaceSchema = z.object({
 		reviews: z.string().array().optional(),
 		ownership: z.string().optional(),
 		photos: z.string().array().optional(),
-		// TODO: change after address routes are ready
+		// TODO: change after address routes are ready - maybe to be deleted
 		address: z.string().optional(),
 	}),
 	payload: z.object({

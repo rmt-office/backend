@@ -16,15 +16,15 @@ const router = Router()
 // router.get('/filter', validate(updateReviewSchema), reviewController.getByFilters)
 
 router.use(isAuthenticated)
+//ID related to the place and not to the review
 router.post('/:id', validate(createReviewSchema), reviewController.create)
 router.get('/:id', validate(testIdReviewSchema('Find One')), reviewController.getOne)
 router.put(
 	'/:id',
-	isAdmin,
 	validate(testIdReviewSchema('Update')),
 	validate(updateReviewSchema),
 	reviewController.update
 )
-router.delete('/:id', isAdmin, validate(testIdReviewSchema('Delete')), reviewController.delete)
+router.delete('/:id', validate(testIdReviewSchema('Delete')), reviewController.delete)
 
 export default router

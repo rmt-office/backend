@@ -11,7 +11,6 @@ const reviewSchema = new Schema(
 		},
 		comment: {
 			type: String,
-			required: true,
 		},
 		tags: {
 			type: [String],
@@ -25,9 +24,10 @@ const reviewSchema = new Schema(
 		},
 		price: {
 			type: Number,
-			min: 0,
-			max: 100,
+			min: 1,
+			max: 5,
 		},
+		//TODO: attach a link to do a speed test and values to know what's fast, medium and slow
 		wifi: {
 			type: String,
 			enum: ['Fast', 'Medium', 'Slow'],
