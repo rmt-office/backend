@@ -25,7 +25,7 @@ export type RouteProps = {
 	res: Response
 	error: ErrorProps
 	next: NextFunction
-	payload: Request & { payload?: PayloadOptions }
+	payload: Request & { payload?: PayloadOptions; isAdmin?: boolean }
 }
 
 export type Timestamps = { createdAt: NativeDate; updatedAt: NativeDate }

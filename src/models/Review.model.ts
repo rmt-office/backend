@@ -51,8 +51,9 @@ const reviewSchema = new Schema(
 			},
 		},
 		creator: {
-			type: Schema.Types.ObjectId, 
-			ref: 'User'}
+			type: Schema.Types.ObjectId,
+			ref: 'User',
+		},
 	},
 	{
 		timestamps: true,
@@ -62,6 +63,6 @@ const reviewSchema = new Schema(
 const ReviewModel = model('Review', reviewSchema)
 type Review = InferSchemaType<typeof reviewSchema>
 type ReviewHydrate = HydratedDocument<typeof reviewSchema>
-type NewReview = Omit<Review, keyof Timestamps | "creator"> & {creator: string}
+type NewReview = Omit<Review, keyof Timestamps | 'creator'> & { creator: string }
 
 export { ReviewModel, Review, ReviewHydrate, NewReview }

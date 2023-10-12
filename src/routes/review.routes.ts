@@ -15,7 +15,7 @@ const router = Router()
 // router.get('/', reviewController.getAll)
 // router.get('/filter', validate(updateReviewSchema), reviewController.getByFilters)
 
-router.use(isAuthenticated)
+router.use(isAuthenticated, isAdmin)
 //ID related to the place and not to the review
 router.post('/:id', validate(createReviewSchema), reviewController.create)
 router.get('/:id', validate(testIdReviewSchema('Find One')), reviewController.getOne)
