@@ -45,10 +45,7 @@ const reviewSchema = new Schema(
 			},
 		],
 		reply: {
-			text: {
-				type: String,
-				ref: 'User',
-			},
+			type: String,
 		},
 		creator: {
 			type: Schema.Types.ObjectId,

@@ -13,10 +13,10 @@ export const createUserSchema = z.object({
 				}),
 			confirmPassword: z.string(),
 		})
-		.refine(data => data.password === data.confirmPassword, {
+		.refine((data) => data.password === data.confirmPassword, {
 			message: `The passwords don't match`,
 		})
-		.transform(data => {
+		.transform((data) => {
 			if (!data.username) {
 				data.username = data.email.split('@')[0]
 			}

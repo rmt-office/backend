@@ -2,6 +2,8 @@ import { RouteProps } from '../utils/types'
 import { NewPlace } from '../models/Place.model'
 import placeServices from '../services/Place.service'
 import { createError, throwError } from '../utils/throwError'
+import { NewAddress } from '../models/Address.model'
+import addressService from '../services/Address.service'
 
 class PlaceController {
 	async create(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
@@ -19,12 +21,19 @@ class PlaceController {
 			tags: req.body.tags,
 			ownership: req.body.ownership,
 			photos: req.body.photos,
-			address: req.body.address,
+			reviews: [],
 			creator,
 		}
 
+		const newAddress: NewAddress = { ...req.body.address }
+
 		try {
-			const placeCreated = await placeServices.createPlace(newPlace)
+			const addressCreated = await addressService.createAddress(newAddress)
+
+			const placeCreated = await placeServices.createPlace({
+				...newPlace,
+				address: addressCreated._id,
+			})
 
 			res.status(200).json(placeCreated)
 		} catch (error: any) {
@@ -74,7 +83,7 @@ class PlaceController {
 
 	async update(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		const { id } = req.params
-		const placeToUpdate: Omit<NewPlace, 'creator'> = {
+		const placeToUpdate: Omit<NewPlace, 'creator' | 'reviews'> = {
 			name: req.body.name,
 			category: req.body.category,
 			contactInfo: req.body.contactInfo,
