@@ -25,7 +25,7 @@ class UserController {
 		try {
 			const userFromDB = await userServices.getOneUser({ $or: [{ email }, { username }] })
 			if (userFromDB) {
-				const error = createError('User already exists', 400)
+				const error = createError('Username and/or email already in use', 400)
 				throwError(error)
 			}
 
