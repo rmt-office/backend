@@ -10,6 +10,8 @@ import { testIdSchema } from '../validationSchema/Id.schema'
 const router = Router()
 
 router.get('/', placeController.getAll)
+router.get('/filter', placeController.getByFilters)
+router.get('/:id', validate(testIdSchema('Find One')), placeController.getOne)
 
 router.use(isAuthenticated)
 router.use(isAdmin)
