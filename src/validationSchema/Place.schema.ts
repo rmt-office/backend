@@ -34,25 +34,17 @@ export const createPlaceSchema = z.object({
 		reviews: z.string().array().optional(),
 		ownership: z.string().optional(),
 		photos: z.string().array().optional(),
-		// TODO: change after address routes are ready
-		address: z.string().optional(),
-	}),
-	payload: z.object({
-		_id: z.string(),
+		isPrivate: z.boolean().optional(),
+		// TODO: change after address routes are ready - maybe to be deleted
+		address: z.object({
+			country: z.string().nonempty(),
+			city: z.string().nonempty(),
+			street: z.string().nonempty(),
+			zipCode: z.string().nonempty(),
+		}),
 	}),
 })
 
 export const updatePlaceSchema = createPlaceSchema.deepPartial()
 
 export type PlaceSchema = z.TypeOf<typeof createPlaceSchema>
-
-export const testIdPlaceSchema = (test: string) => {
-	return z.object({
-		params: z.object({
-			id: z.string().refine(data => mongoose.isValidObjectId(data), {
-				message: 'Invalid Id',
-				path: [test],
-			}),
-		}),
-	})
-}

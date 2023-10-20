@@ -2,7 +2,7 @@ import { AnyZodObject } from 'zod'
 import { RouteProps } from '../utils/types'
 
 export const validate =
-	(schema: AnyZodObject) =>
+	(schema: AnyZodObject, ...rest: any[]) =>
 	(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) => {
 		try {
 			schema.parse({

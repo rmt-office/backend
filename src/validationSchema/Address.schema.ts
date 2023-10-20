@@ -13,14 +13,3 @@ export const createAddressSchema = z.object({
 export const updateAddressSchema = createAddressSchema.deepPartial()
 
 export type AddressSchema = z.TypeOf<typeof createAddressSchema>
-
-export const testIdAddressSchema = (path: string) => {
-	return z.object({
-		params: z.object({
-			id: z.string().refine(data => mongoose.isValidObjectId(data), {
-				message: 'Invalid Id',
-				path: [path],
-			}),
-		}),
-	})
-}

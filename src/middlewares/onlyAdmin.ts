@@ -4,7 +4,7 @@ import UserService from '../services/User.service'
 import { createError, throwError } from '../utils/throwError'
 import { RouteProps } from '../utils/types'
 
-export const isAdmin = async (
+export const onlyAdmin = async (
 	req: RouteProps['payload'],
 	res: RouteProps['res'],
 	next: RouteProps['next']
@@ -13,14 +13,10 @@ export const isAdmin = async (
 
 	try {
 		const user = await UserService.getOneUser({ _id })
-
-		if (!user) {
-			const error = createError(`Check the credentials, it seems that this user doesn't exist`, 401)
-			return throwError(error)
+		if (!user!.isAdmin) {
+			const error = createError(`You don't have the rights to do that`, 403)
+			throwError(error)
 		}
-
-		req.isAdmin = user.isAdmin
-
 		next()
 	} catch (error: any) {
 		error.place = 'Admin middleware'

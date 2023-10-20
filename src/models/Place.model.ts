@@ -57,10 +57,12 @@ const placeSchema = new Schema(
 			isVegan: Boolean,
 			isVegetarian: Boolean,
 		},
-		reviews: {
-			type: Schema.Types.ObjectId,
-			ref: 'User',
-		},
+		reviews: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Review',
+			},
+		],
 		creator: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',
