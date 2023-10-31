@@ -6,6 +6,7 @@ export const createToken = (user: NewUser) => {
 		email: user.email,
 		_id: user._id,
 		username: user.username,
+		profilePicture: user.profilePicture,
 	}
 	const token = jwt.sign(payload, process.env.TOKEN_SECRET!, { expiresIn: '24h' })
 
