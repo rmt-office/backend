@@ -10,7 +10,7 @@ import { RouteProps } from '../utils/types'
 import { hashPassword, validatePassword } from '../utils/passwordHandlers'
 import { createToken } from '../utils/tokenHandler'
 import { sendMail } from '../utils/nodemailer'
-import { NewUser } from '../models/User.model'
+import { NewUser, User, UserInfer, UserModel } from '../models/User.model'
 
 type InputType = {
 	email: string
@@ -68,9 +68,20 @@ class UserController {
 
 	async verify(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		try {
-			const decodedToken = req.payload
-
-			res.status(200).json(decodedToken)
+			const { _id } = req.payload!
+			const userFromDB = await userServices.getOneUser({ _id })
+			if (!userFromDB) {
+				const error = createError('User not found', 400)
+				throw error
+			}
+			const userInfo = {
+				_id: userFromDB._id.toString(),
+				email: userFromDB.email,
+				username: userFromDB.username,
+				profilePicture: userFromDB.profilePicture,
+				favorites: userFromDB.favorites,
+			}
+			res.status(200).json(userInfo)
 		} catch (error: any) {
 			error.place = 'Verify'
 			next(error)
@@ -109,7 +120,7 @@ class UserController {
 	async update(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		const { username, email, password, confirmPassword, currentPassword } = req.body
 		try {
-			const user = await userServices.getOneUser({ email: req.payload!.email })
+			const user = await userServices.getOneUser({ _id: req.payload!._id })
 			let updatedUser
 
 			if (user) {

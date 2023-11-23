@@ -14,10 +14,8 @@ export interface ErrorProps {
 	}[]
 }
 
-interface PayloadOptions extends jwt.JwtPayload {
-	email?: string
-	_id?: string
-	username?: string
+interface PayloadOptions {
+	_id: string
 }
 
 export type RouteProps = {
