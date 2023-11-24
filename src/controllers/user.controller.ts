@@ -121,6 +121,7 @@ class UserController {
 		const { username, email, password, confirmPassword, currentPassword } = req.body
 		try {
 			const user = await userServices.getOneUser({ _id: req.payload!._id })
+			// TODO: change to a save function
 			let updatedUser
 
 			if (user) {
@@ -138,7 +139,7 @@ class UserController {
 					updatedUser = await userServices.findOneAndUpdate({
 						filter: { _id: req.payload!._id },
 						infoUpdate: { password: newPassword },
-						options: { new: true, runValidators: true },
+						options: { new: true, runValidators: true, fields: '-password' },
 					})
 				}
 
@@ -158,16 +159,19 @@ class UserController {
 					updatedUser = await userServices.findOneAndUpdate({
 						filter: { _id: req.payload!._id },
 						infoUpdate: { ...newInfo, canUpdateOn: newUpdatableDate },
-						options: { new: true, runValidators: true },
+						options: { new: true, runValidators: true, fields: '-password' },
 					})
 				}
 
-				const withoutPassword: NewUser = updatedUser!.toObject()
-				delete withoutPassword.password
+				const userInfo = {
+					_id: updatedUser!._id.toString(),
+					email: updatedUser!.email,
+					username: updatedUser!.username,
+					profilePicture: updatedUser!.profilePicture,
+					favorites: updatedUser!.favorites,
+				}
 
-				const token = createToken(withoutPassword)
-
-				res.status(200).json({ token })
+				res.status(200).json(userInfo)
 			}
 		} catch (error: any) {
 			error.place = 'Update user'
