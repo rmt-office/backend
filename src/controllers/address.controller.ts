@@ -5,6 +5,7 @@ import { createError, throwError } from '../utils/throwError'
 
 class AddressController {
 	async create(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
+		// TODO: [3] After geolocation, what should change here
 		const newAddress: NewAddress = {
 			country: req.body.country,
 			city: req.body.city,

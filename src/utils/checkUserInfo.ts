@@ -58,11 +58,13 @@ export const checkEmailInput = (email: string) => {
 }
 
 export const checkUsernameForUpdate = (user: User, username: string) => {
+	//TODO: Set the first updatable to the created date
 	if (user.username !== username) {
 		const canUpdate = user.canUpdateOn
 		if (canUpdate !== 'first') {
 			const isUpdatable = dayjs().isBefore(dayjs(canUpdate))
 			if (isUpdatable) {
+				//TODO: send the next updatable date?
 				const error = createError(`You can't change your username right now`, 400)
 				throwError(error)
 			}

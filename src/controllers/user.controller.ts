@@ -121,7 +121,7 @@ class UserController {
 		const { username, email, password, confirmPassword, currentPassword } = req.body
 		try {
 			const user = await userServices.getOneUser({ _id: req.payload!._id })
-			// TODO: change to a save function
+			// TODO: [4] change to a save function
 			let updatedUser
 
 			if (user) {

@@ -75,6 +75,7 @@ class ReviewController {
 		const otherArray = clicked === 'like' ? 'dislike' : 'like'
 
 		try {
+			//TODO: Independent calls, change to Promise.All
 			const placeFromDB = await placeService.findOne({ reviews: id })
 			const updatedReview = await reviewServices.findOne({ _id: id })
 

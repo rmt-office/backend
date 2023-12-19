@@ -1,4 +1,3 @@
-import mongoose from 'mongoose'
 import z from 'zod'
 
 export const createPlaceSchema = z.object({
@@ -9,8 +8,8 @@ export const createPlaceSchema = z.object({
 			website: z.string().url().optional(),
 			facebook: z.string().url().optional(),
 			linkedIn: z.string().url().optional(),
-			instagram: z.string().optional(),
-			telephone: z.string().optional(),
+			instagram: z.string().nonempty().optional(),
+			telephone: z.string().nonempty().optional(),
 		}),
 		price: z
 			.number()
