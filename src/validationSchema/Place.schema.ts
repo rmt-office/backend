@@ -10,7 +10,13 @@ export const createPlaceSchema = z.object({
 			linkedIn: z.string().url().optional(),
 			instagram: z.string().nonempty().optional(),
 			telephone: z.string().nonempty().optional(),
-		}),
+		})
+		// TODO: test if needed to refine the validation
+		// .refine(data => {
+		// 	const result = z.object({}).strict().safeParse(data)
+		// 	return !result.success
+		// })
+		,
 		price: z
 			.number()
 			.min(1, { message: 'Price must be between 1 and 5' })
