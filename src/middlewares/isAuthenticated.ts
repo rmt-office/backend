@@ -11,7 +11,7 @@ export const isAuthenticated = (req: RouteProps['payload'], res: RouteProps['res
 
       if (token) {
         const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET!)
-        req.payload = { ...decodedToken as jwt.JwtPayload }
+        req.payload = { ...decodedToken as jwt.JwtPayload & { _id: string } }
         next()
       } else {
         const error = createError('Token not found', 401)

@@ -13,5 +13,5 @@ export const errorHandling = (error: RouteProps['error'], res: RouteProps['res']
 		return res.status(error.status || 500).json({ errors, place: error.place })
 	}
 	console.table(error)
-	return res.status(error.status || 500).json({ message: error.message, place: error.place })
+	return res.status(error.status || 500).json({ message: error.message, place: error.place, details: error.details })
 }

@@ -27,6 +27,7 @@ class PlaceController {
 
 		const newAddress: NewAddress = { ...req.body.address }
 
+		console.log(newPlace)
 		try {
 			const addressCreated = await addressService.createAddress(newAddress)
 

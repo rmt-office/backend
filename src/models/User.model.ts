@@ -24,6 +24,7 @@ const userSchema = new Schema(
 			type: String,
 			default: 'first',
 		},
+		verificationToken: String,
 		isVerified: {
 			type: Boolean,
 			default: false,
@@ -45,7 +46,7 @@ const userSchema = new Schema(
 
 type UserInfer = HydratedDocument<typeof userSchema>
 type User = InferSchemaType<typeof userSchema>
-type UserPick = Pick<User, 'username' | 'password' | 'email'>
+type UserPick = Pick<User, 'username' | 'password' | 'email'| 'verificationToken'>
 type NewUser = Overwrite<UserPick, { password?: string; _id?: string; profilePicture?: string }>
 
 const UserModel = model<User>('User', userSchema)

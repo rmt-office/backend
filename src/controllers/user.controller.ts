@@ -1,78 +1,93 @@
-import userServices from '../services/User.service'
+import userServices from '../services/User.service';
 import {
 	checkEmailInput,
 	checkPasswordInput,
 	checkUsernameForUpdate,
 	validateLogin,
-} from '../utils/checkUserInfo'
-import { createError, throwError } from '../utils/throwError'
-import { RouteProps } from '../utils/types'
-import { hashPassword, validatePassword } from '../utils/passwordHandlers'
-import { createToken } from '../utils/tokenHandler'
-import { sendMail } from '../utils/nodemailer'
-import { NewUser, User, UserInfer, UserModel } from '../models/User.model'
+} from '../utils/checkUserInfo';
+import { createError, throwError } from '../utils/throwError';
+import { RouteProps } from '../utils/types';
+import { hashPassword, validatePassword } from '../utils/passwordHandlers';
+import { createToken, verifyToken } from '../utils/tokenHandler';
+import { sendMail } from '../utils/nodemailer';
+import { NewUser, User, UserInfer, UserModel } from '../models/User.model';
 
 type InputType = {
-	email: string
-	password: string
-	confirmPassword: string
-	username: string
-}
+	email: string;
+	password: string;
+	confirmPassword: string;
+	username: string;
+};
 class UserController {
 	async signup(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
-		const { email, password }: InputType = req.body
-		let { username }: InputType = req.body
+		const { email, password }: InputType = req.body;
+		let { username }: InputType = req.body;
 		try {
-			const userFromDB = await userServices.getOneUser({ $or: [{ email }, { username }] })
+			const userFromDB = await userServices.getOneUser({ $or: [{ email }, { username }] });
 			if (userFromDB) {
-				const error = createError('Username and/or email already in use', 400)
-				throwError(error)
+				const error = createError('Username and/or email already in use', 400);
+				throwError(error);
 			}
 
-			const passwordHash = await hashPassword(password)
+			const passwordHash = await hashPassword(password);
 
-			const createdUser = await userServices.createUser({ username, email, password: passwordHash })
-			const newUser: NewUser = createdUser.toObject()
+			const payload = {
+				iss: 'email verification',
+			};
 
-			delete newUser.password
+			const verificationToken = createToken(payload, '15min');
 
-			await sendMail(email, newUser)
+			const createdUser = await userServices.createUser({
+				username,
+				email,
+				password: passwordHash,
+				verificationToken,
+			});
+			const newUser: NewUser = createdUser.toObject();
 
-			res.status(201).json(newUser)
+			delete newUser.password;
+
+			await sendMail(email, verificationToken);
+
+			res.status(201).json(newUser);
 		} catch (error: any) {
-			error.place = 'Sign up'
-			next(error)
+			error.place = 'Sign up';
+			next(error);
 		}
 	}
 
 	async login(req: RouteProps['req'], res: RouteProps['res'], next: RouteProps['next']) {
-		const { email, password } = req.body
+		const { email, password } = req.body;
 
 		try {
-			const userFromDB = await userServices.getOneUser({ email })
-			await validateLogin(userFromDB, password)
+			const userFromDB = await userServices.getOneUser({ email });
+			await validateLogin(userFromDB, password);
 
-			const userObject: NewUser = userFromDB!.toObject()
+			const userObject: NewUser = userFromDB!.toObject();
 			if (userObject) {
-				delete userObject.password
+				delete userObject.password;
 
-				const token = createToken(userObject)
+				const payload = {
+					_id: userObject._id!,
+				};
 
-				res.status(200).json({ token })
+				const token = createToken(payload, '24h');
+
+				res.status(200).json({ token });
 			}
 		} catch (error: any) {
-			error.place = 'Login'
-			next(error)
+			error.place = 'Login';
+			next(error);
 		}
 	}
 
 	async verify(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		try {
-			const { _id } = req.payload!
-			const userFromDB = await userServices.getOneUser({ _id })
+			const { _id } = req.payload!;
+			const userFromDB = await userServices.getOneUser({ _id });
 			if (!userFromDB) {
-				const error = createError('User not found', 400)
-				throw error
+				const error = createError('User not found', 400);
+				throw error;
 			}
 			const userInfo = {
 				_id: userFromDB._id.toString(),
@@ -80,11 +95,11 @@ class UserController {
 				username: userFromDB.username,
 				profilePicture: userFromDB.profilePicture,
 				favorites: userFromDB.favorites,
-			}
-			res.status(200).json(userInfo)
+			};
+			res.status(200).json(userInfo);
 		} catch (error: any) {
-			error.place = 'Verify'
-			next(error)
+			error.place = 'Verify';
+			next(error);
 		}
 	}
 
@@ -93,74 +108,116 @@ class UserController {
 		res: RouteProps['res'],
 		next: RouteProps['next']
 	) {
-		const { id } = req.params
+		const { verificationToken } = req.params;
+		let user;
 		try {
+			user = await userServices.getOneUser({ verificationToken });
+			verifyToken(verificationToken);
 			const updateVerify = {
 				filter: {
-					// TODO: Change to random number
-					_id: id,
+					verificationToken,
 				},
 				infoUpdate: {
 					isVerified: true,
+					verificationToken: undefined,
 				},
 				options: {
 					new: true,
 				},
-			}
-			await userServices.findOneAndUpdate(updateVerify)
-			// TODO: change to an HTML response with a successfull response
-			res.status(200).json({ message: 'Your email was successfully verified' })
+			};
+			await userServices.findOneAndUpdate(updateVerify);
+
+			res.status(200).json({ message: 'Your email was successfully verified' });
 			// TODO: send welcome email
 		} catch (error: any) {
-			error.place = 'Email verification'
-			next(error)
+			error.place = 'Email verification';
+			if (user) {
+				error.details = { id: user._id.toString() };
+			}
+			next(error);
+		}
+	}
+
+	async createAltToken(
+		req: RouteProps['payload'],
+		res: RouteProps['res'],
+		next: RouteProps['next']
+	) {
+		const { _id } = req.params;
+
+		try {
+			const payload = {
+				iss: 'verification',
+			};
+
+			const verificationToken = createToken(payload, '15min');
+
+			const updateVerify = {
+				filter: {
+					_id,
+				},
+				infoUpdate: {
+					verificationToken,
+				},
+				options: {
+					new: true,
+				},
+			};
+			const user = await userServices.findOneAndUpdate(updateVerify);
+
+			await sendMail(user!.email, verificationToken);
+
+			return res.status(200).json({ message: 'New email token created successfully' });
+		} catch (error: any) {
+			error.place = 'Creating new token';
+			next(error);
 		}
 	}
 
 	async update(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
-		const { username, email, password, confirmPassword, currentPassword } = req.body
+		const { username, email, password, confirmPassword, currentPassword } = req.body;
 		try {
-			const user = await userServices.getOneUser({ _id: req.payload!._id })
+			const user = await userServices.getOneUser({ _id: req.payload!._id });
 			// TODO: [4] change to a save function
-			let updatedUser
+			let updatedUser;
 
 			if (user) {
 				if (password) {
-					const validChanges = await validatePassword(currentPassword, user.password)
+					const validChanges = await validatePassword(currentPassword, user.password);
 
 					if (!validChanges) {
-						const error = createError('Invalid credentials', 400)
-						throwError(error)
+						const error = createError('Invalid credentials', 400);
+						throwError(error);
 					}
 
-					checkPasswordInput(password, confirmPassword)
+					checkPasswordInput(password, confirmPassword);
 
-					const newPassword = await hashPassword(password)
+					const newPassword = await hashPassword(password);
 					updatedUser = await userServices.findOneAndUpdate({
 						filter: { _id: req.payload!._id },
 						infoUpdate: { password: newPassword },
 						options: { new: true, runValidators: true, fields: '-password' },
-					})
+					});
 				}
 
 				if (email) {
-					const validChanges = await validatePassword(currentPassword, user.password)
+					const validChanges = await validatePassword(currentPassword, user.password);
 
 					if (!validChanges) {
-						const error = createError('Invalid credentials', 400)
-						throwError(error)
+						const error = createError('Invalid credentials', 400);
+						throwError(error);
 					}
 
-					checkEmailInput(email)
-					const newInfo = { username, email }
+					checkEmailInput(email);
+					const newInfo = { username, email };
 
-					let newUpdatableDate = checkUsernameForUpdate(user, username)
+					let newUpdatableDate = checkUsernameForUpdate(user, username);
 
 					updatedUser = await userServices.findOneAndUpdate({
 						filter: { _id: req.payload!._id },
 						infoUpdate: { ...newInfo, canUpdateOn: newUpdatableDate },
 						options: { new: true, runValidators: true, fields: '-password' },
-					})
+					});
 				}
 
 				const userInfo = {
@@ -169,36 +226,36 @@ class UserController {
 					username: updatedUser!.username,
 					profilePicture: updatedUser!.profilePicture,
 					favorites: updatedUser!.favorites,
-				}
+				};
 
-				res.status(200).json(userInfo)
+				res.status(200).json(userInfo);
 			}
 		} catch (error: any) {
-			error.place = 'Update user'
-			next(error)
+			error.place = 'Update user';
+			next(error);
 		}
 	}
 
 	async updatePhoto(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
-		const { _id } = req.payload!
-		const { profilePicture } = req.body
+		const { _id } = req.payload!;
+		const { profilePicture } = req.body;
 
 		try {
 			if (!profilePicture) {
-				const error = createError('You must send a picture url', 400)
-				throwError(error)
+				const error = createError('You must send a picture url', 400);
+				throwError(error);
 			}
 
 			const updatedUser = await userServices.findOneAndUpdate({
 				filter: { _id: _id },
 				infoUpdate: { profilePicture },
 				options: { new: true, fields: '-password' },
-			})
+			});
 
-			res.status(200).json(updatedUser)
+			res.status(200).json(updatedUser);
 		} catch (error: any) {
-			error.place = 'Profile photo update'
-			next(error)
+			error.place = 'Profile photo update';
+			next(error);
 		}
 	}
 
@@ -212,17 +269,17 @@ class UserController {
 
 	async delete(req: RouteProps['payload'], res: RouteProps['res'], next: RouteProps['next']) {
 		try {
-			const user = await userServices.deleteOne({ _id: req.payload!._id })
+			const user = await userServices.deleteOne({ _id: req.payload!._id });
 			if (user === null) {
-				const error = createError('User already deleted', 400)
-				throwError(error)
+				const error = createError('User already deleted', 400);
+				throwError(error);
 			}
-			res.status(204).json()
+			res.status(204).json();
 		} catch (error: any) {
-			error.place = 'Delete user'
-			next(error)
+			error.place = 'Delete user';
+			next(error);
 		}
 	}
 }
 
-export default new UserController()
+export default new UserController();

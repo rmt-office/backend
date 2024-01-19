@@ -1,39 +1,33 @@
-import z from 'zod'
+import z from 'zod';
 
 export const createPlaceSchema = z.object({
 	body: z.object({
-		name: z.string(),
+		name: z.string().nonempty(),
 		category: z.enum(['Café', 'Airport', 'Hotel Lobby', 'Library', 'Coworking']),
 		contactInfo: z.object({
 			website: z.string().url().optional(),
 			facebook: z.string().url().optional(),
 			linkedIn: z.string().url().optional(),
-			instagram: z.string().nonempty().optional(),
+			instagram: z.string().url().optional(),
 			telephone: z.string().nonempty().optional(),
-		})
-		// TODO: test if needed to refine the validation
-		// .refine(data => {
-		// 	const result = z.object({}).strict().safeParse(data)
-		// 	return !result.success
-		// })
-		,
+		}),
 		price: z
 			.number()
 			.min(1, { message: 'Price must be between 1 and 5' })
 			.max(5, { message: 'Price must be between 1 and 5' })
 			.optional(),
-		meetingRoom: z.number().min(0, { message: 'Meeting Rooms must be at least 0' }).optional(),
-		bathrooms: z.number().min(0, { message: 'Bathrooms must be at least 0' }).optional(),
+		meetingRoom: z.number().min(0, { message: 'Meeting Rooms must be at least 0' }).nullish(),
+		bathrooms: z.number().min(0, { message: 'Bathrooms must be at least 0' }).optional().nullish(),
 		description: z.string().optional(),
 		wifiSpeed: z.enum(['Fast', 'Medium', 'Slow']).optional(),
 		tags: z
 			.object({
-				hasFood: z.boolean(),
-				hasDrink: z.boolean(),
-				hasCafeteria: z.boolean(),
-				isAccessible: z.boolean(),
-				isVegan: z.boolean(),
-				isVegetarian: z.boolean(),
+				hasFood: z.boolean().optional(),
+				hasDrink: z.boolean().optional(),
+				hasCafeteria: z.boolean().optional(),
+				isAccessible: z.boolean().optional(),
+				isVegan: z.boolean().optional(),
+				isVegetarian: z.boolean().optional(),
 			})
 			.optional(),
 		reviews: z.string().array().optional(),
@@ -48,8 +42,8 @@ export const createPlaceSchema = z.object({
 			zipCode: z.string().nonempty(),
 		}),
 	}),
-})
+});
 
-export const updatePlaceSchema = createPlaceSchema.deepPartial()
+export const updatePlaceSchema = createPlaceSchema.deepPartial();
 
-export type PlaceSchema = z.TypeOf<typeof createPlaceSchema>
+export type PlaceSchema = z.TypeOf<typeof createPlaceSchema>;

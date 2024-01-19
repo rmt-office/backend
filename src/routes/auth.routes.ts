@@ -9,6 +9,7 @@ const router = Router()
 router.post('/signup', validate(createUserSchema), userController.signup)
 router.post('/login', validate(loginSchema), userController.login)
 router.get('/verify', isAuthenticated, userController.verify)
-router.get('/:id', userController.emailVerification)
+router.get('/:verificationToken', userController.emailVerification)
+router.get('/newToken/:_id', userController.createAltToken)
 
 export default router

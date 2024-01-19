@@ -7,6 +7,7 @@ export const checkEmailRegex = (email: string) => {
 	const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
 	return email.match(emailRegex)
 }
+
 const checkPasswordRegex = (password: string) => {
 	const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
 	return password.match(passwordRegex)
@@ -22,10 +23,10 @@ export const validateLogin = async (user: User | null, passwordCandidate: string
 			throwError(error)
 		}
 		// TODO: Uncomment for deployed version
-		// if (!user.isVerified) {
-		//   const error =  createError(`User isn't verified yet`, 400)
-		//   throwError(error)
-		// }
+		if (!user.isVerified) {
+		  const error =  createError(`User isn't verified yet`, 400)
+		  throwError(error)
+		}
 	} else {
 		const error = createError('Invalid credentials', 400)
 		throwError(error)

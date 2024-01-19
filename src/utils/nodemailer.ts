@@ -1,5 +1,4 @@
 import nodemailer from 'nodemailer'
-import { NewUser } from '../models/User.model'
 
 export const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -9,11 +8,11 @@ export const transporter = nodemailer.createTransport({
   }
 })
 
-export const sendMail = async (email: string, user: NewUser) => {
+export const sendMail = async (email: string, token: string) => {
   await transporter.sendMail({
     from: `Remote Office Team ${process.env.GMAIL_USER}`,
     to: email,
     subject: 'Email verification - Remote Office',
-    html: `<a href='${process.env.ROOT}/auth/${user._id}' target='_blank' rel='noreferrer' rel='noopener'> Click here to verify your email </a>`
+    html: `<a href='${process.env.ORIGIN}/auth/?token=${token}' target='_blank' rel='noreferrer' rel='noopener'> Click here to verify your email </a>`
   })
 }

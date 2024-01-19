@@ -5,6 +5,7 @@ export type Overwrite<T1, T2> = { [Prop in Exclude<keyof T1, keyof T2>]: T1[Prop
 export interface ErrorProps {
 	message: string
 	status: number
+	details?: Record<string, string>
 	place?: string
 	issues?: {
 		message: any
