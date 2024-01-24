@@ -36,6 +36,9 @@ class UserController {
 			};
 
 			const verificationToken = createToken(payload, '15min');
+			if (!username) {
+				username = email.split('@')[0]
+			}
 
 			const createdUser = await userServices.createUser({
 				username,
